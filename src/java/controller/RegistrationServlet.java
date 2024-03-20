@@ -86,7 +86,6 @@ public class RegistrationServlet extends HttpServlet {
         user.setPassword(request.getParameter("password"));
         user.setUserType(request.getParameter("usertype"));
         
-        
         RequestDispatcher dispatcher = null;
         
         try{
