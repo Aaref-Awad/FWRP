@@ -90,6 +90,13 @@ public class RegistrationServlet extends HttpServlet {
         
         try{
             userBusinessLogic.addUser(user);
+            if (user.getUserType().equalsIgnoreCase("Consumer")){
+                    response.sendRedirect("views/ConsumerPage.jsp");
+                }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
+                     response.sendRedirect("views/CharityOrgPage.jsp");
+                } else {
+                  response.sendRedirect("views/RetailerPage.jsp");
+                }
             
             int rowCount = 0;
             dispatcher = request.getRequestDispatcher("RegistrationPage.jsp");
