@@ -28,8 +28,6 @@ public class UserDAOImpl implements UserDAO {
         ArrayList<UserDTO> users = null;
 
         try {
-            
-
             String query = "SELECT * FROM User ORDER BY UserID";
             pstmt = con.prepareStatement(query);
 
@@ -60,21 +58,6 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-//            try {
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//            }
         }
         return users;
     }
@@ -102,29 +85,36 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-//            try {
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//            }
+        }
+        return user;
+    }
+    
+    @Override
+    public UserDTO getUserByUsername(String username) {
+        UserDTO user = null;
+        try {
+            pstmt = con.prepareStatement(
+                    "SELECT * FROM User WHERE Username = ?");
+            pstmt.setString(1, username);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                user = new UserDTO();
+                user.setUserType(rs.getString("UserType"));
+                user.setEmail(rs.getString("Email"));
+                user.setUsername(rs.getString("Username"));
+                user.setPassword(rs.getString("Password"));
+                user.setIsSubed(rs.getBoolean("IsSubed"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
         }
         return user;
     }
 
+
     @Override
     public void insertUser(UserDTO user) {
-        
-
         try {
             if (!userExists(user.getUsername())) {
 
@@ -144,13 +134,10 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
-    public void updateUser(UserDTO user) {
-       
-
+    public void updateUser(UserDTO user) {      
         try {
             
             pstmt = con.prepareStatement(
@@ -169,8 +156,6 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void deleteUser(UserDTO user) {
-        
-
         try {
             
             pstmt = con.prepareStatement(
@@ -180,21 +165,9 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-//            try {
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//            }
         }
     }
-    
-    
+ 
     private boolean userExists(String username) throws SQLException {
         try (PreparedStatement pstmt = con.prepareStatement("SELECT COUNT(*) FROM User WHERE Username = ?")) {
             pstmt.setString(1, username);

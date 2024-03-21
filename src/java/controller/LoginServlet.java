@@ -5,8 +5,11 @@
 package controller;
 
 
+import DTO.UserDTO;
+import businesslayer.UserBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -71,7 +74,33 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
+        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        
+        
+        
+        try{
+            UserDTO user = userBusinessLogic.getUserByUsername(username);
+            if (user.getPassword().equals(password)){
+                if (user.getUserType().equalsIgnoreCase("Consumer")){
+                    response.sendRedirect("views/ConsumerPage.jsp");
+                }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
+                     response.sendRedirect("views/CharityOrgPage.jsp");
+                } else {
+                  response.sendRedirect("views/RetailerPage.jsp");
+                }
+            }
+
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            
+        } finally{
+                
+            }
     }
 
     /**

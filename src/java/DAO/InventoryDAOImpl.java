@@ -18,18 +18,14 @@ import java.util.List;
  * @author Owner
  */
 public class InventoryDAOImpl implements InventoryDAO{
-    
      private static Connection con = DataSource.getInstance().getConnection();;
     private static PreparedStatement pstmt;
     private static ResultSet rs;
-
+    
     @Override
     public List<InventoryDTO> getAllFoodItems() {
         ArrayList<InventoryDTO> items = null;
-
         try {
-            
-
             String query = "SELECT * FROM inventory ORDER BY FoodID";
             pstmt = con.prepareStatement(query);
 
@@ -60,21 +56,6 @@ public class InventoryDAOImpl implements InventoryDAO{
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-//            try {
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//            }
         }
         return items;
     }
@@ -82,9 +63,7 @@ public class InventoryDAOImpl implements InventoryDAO{
     @Override
     public InventoryDTO getFoodById(int foodID) {
         InventoryDTO food = null;
-
         try {
-            
             pstmt = con.prepareStatement(
                     "SELECT * FROM Inventory WHERE FoodID = ?");
             pstmt.setInt(1, foodID);
@@ -104,27 +83,12 @@ public class InventoryDAOImpl implements InventoryDAO{
                 food.setExpirationDate(expirationDate);
                 
                 String surplusType = rs.getString("SurplusType");
-                food.setSurplusType(surplusType);
-                
+                food.setSurplusType(surplusType);  
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-//            try {
-//                if (rs != null) {
-//                    rs.close();
-//                }
-//
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//            }
+
         }
         return food;
     }
@@ -134,9 +98,6 @@ public class InventoryDAOImpl implements InventoryDAO{
        try {
             InventoryDTO existingData = getFoodById(food.getFoodID());
             if (existingData == null) {
-
-               
-
                 pstmt = con.prepareStatement(
                         "INSERT INTO Inventory (FoodID, FoodName, FoodAmount, Price, ExpirationDate, SurplusType) "
                         + "VALUES(?, ?, ?, ?, ?)");
@@ -160,13 +121,11 @@ public class InventoryDAOImpl implements InventoryDAO{
                 //  e.printStackTrace();
             }
         }
-
     }
 
     @Override
     public void updateFood(InventoryDTO food) {
-        try {
-            
+        try {         
             pstmt = con.prepareStatement(
                     "UPDATE User SET FoodID=? , FoodName=?, FoodAmount=?, Price=?, ExpirationDate=?, SurplusType=? ");
             pstmt.setInt(1, food.getFoodID());
@@ -180,11 +139,9 @@ public class InventoryDAOImpl implements InventoryDAO{
             e.printStackTrace();
         }
     }
-
     @Override
     public void deleteFood(InventoryDTO food) {
         try {
-            
             pstmt = con.prepareStatement(
                     "DELETE FROM Inventory WHERE FoodID = ?");
             pstmt.setInt(1, food.getFoodID());
@@ -192,17 +149,6 @@ public class InventoryDAOImpl implements InventoryDAO{
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-//            try {
-//                if (pstmt != null) {
-//                    pstmt.close();
-//                }
-//
-//                if (con != null) {
-//                    con.close();
-//                }
-//            } catch (SQLException ex) {
-//                System.out.println(ex.getMessage());
-//            }
         }
     }
 }

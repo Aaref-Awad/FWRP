@@ -98,13 +98,13 @@ public class RegistrationServlet extends HttpServlet {
                   response.sendRedirect("views/RetailerPage.jsp");
                 }
             
-            int rowCount = 0;
-            dispatcher = request.getRequestDispatcher("RegistrationPage.jsp");
-            if(rowCount > 0){
-                request.setAttribute("status", "success");
-            } else {
-                request.setAttribute("status", "failed");
-            }
+//            int rowCount = 0;
+//            dispatcher = request.getRequestDispatcher("RegistrationPage.jsp");
+//            if(rowCount > 0){
+//                request.setAttribute("status", "success");
+//            } else {
+//                request.setAttribute("status", "failed");
+//            }
             
         }catch(Exception e){
             e.printStackTrace();
