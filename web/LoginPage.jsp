@@ -15,25 +15,27 @@
         <header>
             
         </header>
-        <main>
-            <div>
-                <form action="" method="post">
-                    
-                    <h1>Login</h1>
-                    
-                    <div>
-                        <input type="text" name="username" id="username" placeholder="Username" required>
-                    </div>
-                    
-                    <div>
-                        <input type="password" name="password" id="password" placeholder="Password" required>
-                    </div>
-                    
-                    <button type="submit" name="submit" id="login">Login</button> <br>
-                    <a href="RegistrationPage.jsp" target="target">Register</a>
-                </form>
-            </div>
-        </main>
+        <CENTER>
+            <main>
+                <div>
+                    <form action="" method="post">
+
+                        <h1>Login</h1>
+
+                        <div>
+                            <input type="text" name="username" id="username" placeholder="Username" required>
+                        </div>
+
+                        <div>
+                            <input type="password" name="password" id="password" placeholder="Password" required>
+                        </div>
+
+                        <button type="submit" name="submit" id="login">Login</button> <br>
+                        <a href="RegistrationPage.jsp" target="target">Register</a>
+                    </form>
+                </div>
+            </main>
+        </CENTER>
         <footer>
             
         </footer>

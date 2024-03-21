@@ -38,7 +38,7 @@
                     </div>
                     
                     <div>
-                        <select name="usertype" id="usertype">
+                        <select name="usertype" id="usertype" required>
                             <option value="" disabled selected>Select your User Type</option>
                             <option value="Consumer">Consumer</option>
                             <option value="Retailer">Retailer</option>

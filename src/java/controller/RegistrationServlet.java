@@ -86,11 +86,17 @@ public class RegistrationServlet extends HttpServlet {
         user.setPassword(request.getParameter("password"));
         user.setUserType(request.getParameter("usertype"));
         
-        
         RequestDispatcher dispatcher = null;
         
         try{
             userBusinessLogic.addUser(user);
+            if (user.getUserType().equalsIgnoreCase("Consumer")){
+                    response.sendRedirect("views/ConsumerPage.jsp");
+                }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
+                     response.sendRedirect("views/CharityOrgPage.jsp");
+                } else {
+                  response.sendRedirect("views/RetailerPage.jsp");
+                }
             
             int rowCount = 0;
             dispatcher = request.getRequestDispatcher("RegistrationPage.jsp");
