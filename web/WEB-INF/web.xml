@@ -16,6 +16,10 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>controller.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+    <servlet-name>ClaimDonationServlet</servlet-name>
+    <servlet-class>controller.ClaimDonationServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FWRPServlet</servlet-name>
         <url-pattern>/FWRPServlet</url-pattern>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>ClaimDonationServlet</servlet-name>
+    <url-pattern>/claimDonation</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
