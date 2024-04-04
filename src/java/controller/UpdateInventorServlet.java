@@ -4,8 +4,8 @@
  */
 package controller;
 
-import DTO.InventoryDTO;
-import businesslayer.InventoryBusinessLogic;
+//import DTO.InventoryDTO;
+//import businesslayer.InventoryBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -57,23 +57,23 @@ public class UpdateInventorServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        InventoryBusinessLogic inventoryBusinessLogic = new InventoryBusinessLogic();
-        List<InventoryDTO> foodItems = null;
-
-        try {
-            foodItems = inventoryBusinessLogic.getAllFoodItems();
-        } catch (SQLException ex) {
-            log(ex.getMessage());
-        }
-
-        request.setAttribute("fooditems", foodItems);
-
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/RetailerPage.jsp");
-        dispatcher.forward(request, response);
-    }
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        InventoryBusinessLogic inventoryBusinessLogic = new InventoryBusinessLogic();
+//        List<InventoryDTO> foodItems = null;
+//
+//        try {
+//            foodItems = inventoryBusinessLogic.getAllFoodItems();
+//        } catch (SQLException ex) {
+//            log(ex.getMessage());
+//        }
+//
+//        request.setAttribute("fooditems", foodItems);
+//
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("views/RetailerPage.jsp");
+//        dispatcher.forward(request, response);
+//    }
 
     /**
      * Handles the HTTP <code>POST</code> method.

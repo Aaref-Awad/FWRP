@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -74,34 +75,40 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
-        
+
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        
-        
-        
+
         try{
             UserDTO user = userBusinessLogic.getUserByUsername(username);
+            HttpSession session = request.getSession(); 
+            session.setAttribute("userId", user.getUserID());
+            session.setAttribute("userName", user.getUsername());
+
+            RequestDispatcher rd = null;
+
             if (user.getPassword().equals(password)){
                 if (user.getUserType().equalsIgnoreCase("Consumer")){
-                    response.sendRedirect("views/ConsumerPage.jsp");
+                    rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
                 }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
-                     response.sendRedirect("views/CharityOrgPage.jsp");
+                     rd = request.getRequestDispatcher("views/CharityOrgPage.jsp");
                 } else {
-                  response.sendRedirect("views/RetailerPage.jsp");
+                  rd = request.getRequestDispatcher("views/RetailerPage.jsp");
                 }
             }
 
-            
+            if (rd != null) {
+                rd.forward(request, response);
+            }
+
         }catch(Exception e){
             e.printStackTrace();
-            
-        } finally{
-                
-            }
+        }
     }
+
+
 
     /**
      * Returns a short description of the servlet.

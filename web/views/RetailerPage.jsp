@@ -4,8 +4,6 @@
     Author     : Aaref
 --%>
 
-<%@page import="java.util.List"%>
-<%@page import="DTO.InventoryDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,30 +16,8 @@
             
         </header>
         <main>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% List<InventoryDTO> items = (List<InventoryDTO>) request.getAttribute("fooditems");
-                    for (InventoryDTO Inventory : items) {%>
-                    <tr>
-                        <td>
-                            <% if(Inventory.getFoodName() != null && !Inventory.getFoodName().isEmpty()) { %>
-                                <%= Inventory.getFoodName() %>
-                            <% } %>
-                        </td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <% }%>
-                </tbody>
-
-        </table>
+            <p>User ID: <%= session.getAttribute("userId").toString() %></p><br>
+            <p>User ID: <%= session.getAttribute("userName") %></p>
         </main>
         <footer>
             

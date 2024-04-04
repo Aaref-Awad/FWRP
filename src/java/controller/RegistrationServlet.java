@@ -4,7 +4,7 @@
  */
 package controller;
 
-import DAO.DataSource;
+import data.DataSource;
 import DTO.UserDTO;
 import businesslayer.UserBusinessLogic;
 
@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -80,16 +81,19 @@ public class RegistrationServlet extends HttpServlet {
             throws ServletException, IOException {
         UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
         UserDTO user = new UserDTO();
-        
+
         user.setUsername(request.getParameter("username"));
         user.setEmail(request.getParameter("email"));
         user.setPassword(request.getParameter("password"));
         user.setUserType(request.getParameter("usertype"));
-        
+
         RequestDispatcher dispatcher = null;
-        
+
         try{
             userBusinessLogic.addUser(user);
+            HttpSession session = request.getSession(); // Corrected variable name
+            session.setAttribute("userId", user.getUserID());
+            
             if (user.getUserType().equalsIgnoreCase("Consumer")){
                     response.sendRedirect("views/ConsumerPage.jsp");
                 }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
@@ -97,22 +101,15 @@ public class RegistrationServlet extends HttpServlet {
                 } else {
                   response.sendRedirect("views/RetailerPage.jsp");
                 }
-            
-//            int rowCount = 0;
-//            dispatcher = request.getRequestDispatcher("RegistrationPage.jsp");
-//            if(rowCount > 0){
-//                request.setAttribute("status", "success");
-//            } else {
-//                request.setAttribute("status", "failed");
-//            }
-            
+
         }catch(Exception e){
             e.printStackTrace();
-            
+
         } finally{
-                
+
             }
     }
+
 
     /**
      * Returns a short description of the servlet.
