@@ -35,7 +35,7 @@
                             <option value="Sale">Sale</option>
                         </select>
                     </div>
-                    <button type="submit" name="Add" id="AddItem">Add Item</button> <br>
+                    <button type="submit" name="Add" id="AddItem" onclick="window.location.href='RetailerPage.jsp'">Add Item</button> <br>
                 </form>
             </div>
         </main>

@@ -24,8 +24,8 @@ public class UserBusinessLogic {
         return usersDao.getAllUsers();
     }
     
-    public UserDTO getUserByUsername(String name){
-        return usersDao.getUserByUsername(name);
+    public UserDTO getUserByLogin(String name, String password){
+        return usersDao.getUserByLogin(name, password);
     }
 
     public void addUser(UserDTO user) {

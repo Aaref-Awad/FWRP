@@ -16,11 +16,14 @@
             
         </header>
         <main>
-            <p>User ID: <%= session.getAttribute("userId").toString() %></p><br>
+            <p>User ID: <%= session.getAttribute("userId")%></p><br>
             <p>User ID: <%= session.getAttribute("userName") %></p>
+            <!-- Add a button that redirects to AddRetailerFoodItem.jsp -->
+            <button onclick="window.location.href='AddRetailerFoodItem.jsp'">Go to Add Retailer Food Item Page</button>
         </main>
         <footer>
             
         </footer>
     </body>
 </html>
+

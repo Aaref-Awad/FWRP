@@ -25,7 +25,7 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         ArrayList<RetailerInventoryDTO> inventories = null;
 
         try {
-            String query = "SELECT * FROM RetailerInventory ORDER BY InventoryID";
+            String query = "SELECT r.*, f.FoodName, f.Price as FoodPrice FROM RetailerInventory r JOIN Food f ON r.FoodID = f.FoodID ORDER BY r.InventoryID";
             pstmt = con.prepareStatement(query);
 
             rs = pstmt.executeQuery();
@@ -35,6 +35,7 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
                 inventory.setInventoryID(rs.getInt("InventoryID"));
                 inventory.setUserID(rs.getInt("UserID"));
                 inventory.setFoodID(rs.getInt("FoodID"));
+                inventory.setFoodName(rs.getString("FoodName"));
                 inventory.setFoodAmount(rs.getInt("FoodAmount"));
                 inventory.setPrice(rs.getDouble("Price"));
                 inventory.setExpirationDate(rs.getDate("ExpirationDate"));
@@ -57,13 +58,14 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         try {
             
             pstmt = con.prepareStatement(
-                    "SELECT * FROM RetailerInventory WHERE InventoryID = ?");
+                    "SELECT r.*, f.FoodName, f.Price as FoodPrice FROM RetailerInventory r JOIN Food f ON r.FoodID = f.FoodID WHERE r.InventoryID = ?");
             pstmt.setInt(1, inventoryId);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 inventory = new RetailerInventoryDTO();
                 inventory.setUserID(rs.getInt("UserID"));
                 inventory.setFoodID(rs.getInt("FoodID"));
+                inventory.setFoodName(rs.getString("FoodName"));
                 inventory.setFoodAmount(rs.getInt("FoodAmount"));
                 inventory.setPrice(rs.getDouble("Price"));
                 inventory.setExpirationDate(rs.getDate("ExpirationDate"));

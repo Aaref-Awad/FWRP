@@ -82,7 +82,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
 
         try{
-            UserDTO user = userBusinessLogic.getUserByUsername(username);
+            UserDTO user = userBusinessLogic.getUserByLogin(username, password);
             HttpSession session = request.getSession(); 
             session.setAttribute("userId", user.getUserID());
             session.setAttribute("userName", user.getUsername());
@@ -92,10 +92,13 @@ public class LoginServlet extends HttpServlet {
             if (user.getPassword().equals(password)){
                 if (user.getUserType().equalsIgnoreCase("Consumer")){
                     rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
+                    response.sendRedirect("views/ConsumerPage.jsp");
                 }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
-                     rd = request.getRequestDispatcher("views/CharityOrgPage.jsp");
+                     rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
+                     response.sendRedirect("views/ConsumerPage.jsp");
                 } else {
                   rd = request.getRequestDispatcher("views/RetailerPage.jsp");
+                  response.sendRedirect("views/RetailerPage.jsp");
                 }
             }
 

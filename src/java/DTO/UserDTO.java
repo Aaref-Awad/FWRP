@@ -1,21 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DTO;
 
-/**
- *
- * @author Owner
- */
 public class UserDTO {
    private Integer UserID;
    private String UserType;
    private String Email;
    private String Username;
    private String Password;
+   private String PhoneNumber; // Add PhoneNumber field
    private boolean IsSubed;
-   
+   private double Balance; // Add Balance field
    
     public Integer getUserID() {
         return UserID;
@@ -65,5 +58,19 @@ public class UserDTO {
         this.IsSubed = IsSubed;
     }
    
-   
+    public String getPhoneNumber() { // Getter for PhoneNumber
+        return PhoneNumber;
+    }
+
+    public void setPhoneNumber(String PhoneNumber) { // Setter for PhoneNumber
+        this.PhoneNumber = PhoneNumber;
+    }
+
+    public double getBalance() { // Getter for Balance
+        return Balance;
+    }
+
+    public void setBalance(double Balance) { // Setter for Balance
+        this.Balance = Balance;
+    }
 }

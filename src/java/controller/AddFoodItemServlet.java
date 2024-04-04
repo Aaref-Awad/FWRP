@@ -90,24 +90,19 @@ public class AddFoodItemServlet extends HttpServlet {
         try{
             foodBusinessLogic.addFood(foodItem);
             foodItem.setFoodID(foodBusinessLogic.getFoodByName(foodItem.getFoodName()).getFoodID());
-        }catch(Exception e){
-            e.printStackTrace();
-        } finally{
-
-        }
-
-        inventory.setUserID(userId);
-        inventory.setFoodID(foodItem.getFoodID());
-        inventory.setFoodAmount(Integer.parseInt(request.getParameter("FoodAmount")));
-        inventory.setExpirationDate(Date.valueOf(request.getParameter("ExpirationDate")));  // java.sql.Date is used here
-        inventory.setSurplusType(request.getParameter("SurplusType"));
-
-        try{
+            
+            inventory.setUserID(userId);
+            inventory.setFoodID(foodItem.getFoodID());
+            inventory.setFoodAmount(Integer.parseInt(request.getParameter("FoodAmount")));
+            inventory.setExpirationDate(Date.valueOf(request.getParameter("ExpirationDate")));  // java.sql.Date is used here
+            inventory.setSurplusType(request.getParameter("SurplusType"));
+            inventory.setPrice(0.0);
+            
             retailerInventoryBusinessLogic.addInventory(inventory);
             response.sendRedirect("views/RetailerPage.jsp");
         }catch(Exception e){
             e.printStackTrace();
-        } finally{
+        }finally{
 
         }
     }

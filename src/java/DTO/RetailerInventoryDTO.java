@@ -10,6 +10,7 @@ public class RetailerInventoryDTO {
     private Integer InventoryID;
     private Integer UserID;
     private Integer FoodID;
+    private String FoodName;
     private Integer FoodAmount;
     private Double Price;
     private Date ExpirationDate;
@@ -69,5 +70,13 @@ public class RetailerInventoryDTO {
 
     public void setSurplusType(String SurplusType) {
         this.SurplusType = SurplusType;
+    }
+    
+        public String getFoodName() { // Getter for FoodName
+        return FoodName;
+    }
+
+    public void setFoodName(String FoodName) { // Setter for FoodName
+        this.FoodName = FoodName;
     }
 }
