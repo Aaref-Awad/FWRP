@@ -4,9 +4,7 @@
  */
 package controller;
 
-import DTO.FoodDTO;
 import DTO.RetailerInventoryDTO;
-import businesslayer.FoodBusinessLogic;
 import businesslayer.RetailerInventoryBusinessLogic;
 import businesslayer.UserBusinessLogic;
 import java.io.IOException;
@@ -77,26 +75,22 @@ public class AddFoodItemServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
-        FoodBusinessLogic foodBusinessLogic = new FoodBusinessLogic();
         RetailerInventoryDTO inventory = new RetailerInventoryDTO();
-        FoodDTO foodItem = new FoodDTO();
-
+        
         // Assuming that the UserID is stored in the session
         HttpSession session = request.getSession();
         int userId = (Integer) session.getAttribute("userId");
-
-        foodItem.setFoodName(request.getParameter("FoodName"));
+        String foodItem = request.getParameter("FoodName");
         
         try{
-            foodBusinessLogic.addFood(foodItem);
-            foodItem.setFoodID(foodBusinessLogic.getFoodByName(foodItem.getFoodName()).getFoodID());
-            
+
             inventory.setUserID(userId);
-            inventory.setFoodID(foodItem.getFoodID());
             inventory.setFoodAmount(Integer.parseInt(request.getParameter("FoodAmount")));
-            inventory.setExpirationDate(Date.valueOf(request.getParameter("ExpirationDate")));  // java.sql.Date is used here
+            inventory.setExpirationDate(Date.valueOf(request.getParameter("ExpirationDate")));  
             inventory.setSurplusType(request.getParameter("SurplusType"));
+            inventory.setFoodName(foodItem);
             inventory.setPrice(0.0);
+
             
             retailerInventoryBusinessLogic.addInventory(inventory);
             response.sendRedirect("views/RetailerPage.jsp");

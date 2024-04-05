@@ -81,6 +81,7 @@ public class RegistrationServlet extends HttpServlet {
             throws ServletException, IOException {
         UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
         UserDTO user = new UserDTO();
+        HttpSession session = request.getSession(); 
 
         user.setUsername(request.getParameter("username"));
         user.setEmail(request.getParameter("email"));
@@ -91,8 +92,8 @@ public class RegistrationServlet extends HttpServlet {
 
         try{
             userBusinessLogic.addUser(user);
-            HttpSession session = request.getSession(); // Corrected variable name
-            session.setAttribute("userId", user.getUserID());
+            session.setAttribute("userId", userBusinessLogic.getUserByLogin(user.getUsername(), user.getPassword()).getUserID());
+            session.setAttribute("userName", user.getUsername());
             
             if (user.getUserType().equalsIgnoreCase("Consumer")){
                     response.sendRedirect("views/ConsumerPage.jsp");

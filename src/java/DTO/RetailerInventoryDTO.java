@@ -9,7 +9,6 @@ import java.util.Date;
 public class RetailerInventoryDTO {
     private Integer InventoryID;
     private Integer UserID;
-    private Integer FoodID;
     private String FoodName;
     private Integer FoodAmount;
     private Double Price;
@@ -30,14 +29,6 @@ public class RetailerInventoryDTO {
 
     public void setUserID(Integer UserID) {
         this.UserID = UserID;
-    }
-
-    public Integer getFoodID() {
-        return FoodID;
-    }
-
-    public void setFoodID(Integer FoodID) {
-        this.FoodID = FoodID;
     }
 
     public Integer getFoodAmount() {
