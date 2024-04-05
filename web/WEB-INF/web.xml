@@ -20,6 +20,10 @@
         <servlet-name>AddFoodItemServlet</servlet-name>
         <servlet-class>controller.AddFoodItemServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateInventorServlet</servlet-name>
+        <servlet-class>controller.UpdateInventorServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>FWRPServlet</servlet-name>
@@ -41,6 +45,11 @@
     <servlet-mapping>
         <servlet-name>AddFoodItemServlet</servlet-name>
         <url-pattern>/AddFoodItemServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+    <servlet-name>UpdateInventorServlet</servlet-name>
+    <url-pattern>/UpdateInventorServlet</url-pattern>
     </servlet-mapping>
 
     <session-config>

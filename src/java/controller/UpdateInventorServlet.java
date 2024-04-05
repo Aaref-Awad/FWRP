@@ -6,15 +6,18 @@ package controller;
 
 //import DTO.InventoryDTO;
 //import businesslayer.InventoryBusinessLogic;
+import DTO.RetailerInventoryDTO;
+import businesslayer.RetailerInventoryBusinessLogic;
+import businesslayer.UserBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 /**
  *
@@ -83,11 +86,44 @@ public class UpdateInventorServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+
+
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        try{
+            // Create a RetailerInventoryDTO object with updated information
+            RetailerInventoryDTO updatedInventory = new RetailerInventoryDTO();
+            if (userId != null) {
+                updatedInventory.setUserID(userId);
+            }
+            updatedInventory.setInventoryID(Integer.parseInt(request.getParameter("inventoryId")));
+            updatedInventory.setFoodName(request.getParameter("foodName"));
+            updatedInventory.setFoodAmount(Integer.parseInt(request.getParameter("foodAmount")));
+            updatedInventory.setExpirationDate(Date.valueOf(request.getParameter("expirationDate")));
+            updatedInventory.setSurplusType(request.getParameter("surplusType"));
+            updatedInventory.setPrice(Double.parseDouble(request.getParameter("price")));
+
+            // Update inventory in the database
+            RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
+            retailerInventoryBusinessLogic.updateInventory(updatedInventory);
+
+            // Redirect back to the UpdateInventoryPage or any other appropriate page
+            response.sendRedirect("views/RetailerPage.jsp");
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+
+        }
     }
+
+    
+
+   
 
     /**
      * Returns a short description of the servlet.
