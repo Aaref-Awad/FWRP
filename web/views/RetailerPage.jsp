@@ -9,9 +9,11 @@
     <title>Inventory Page</title>
 </head>
 <body>
-<header>
+    <header>
+        <%@ include file="../header.jsp" %>
+    </header>
 
-</header>
+
 <main>
     <button onclick="window.location.href='AddRetailerFoodItem.jsp'">Go to Add Retailer Food Item Page</button>
     <%
@@ -24,7 +26,7 @@
 
             // Retrieve inventories related to the current user
             RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
-            List<RetailerInventoryDTO> inventories = retailerInventoryBusinessLogic.getInventoryById(userId);
+            List<RetailerInventoryDTO> inventories = retailerInventoryBusinessLogic.getInventoriesById(userId);
 
             // Display the inventories in a table
             out.println("<table border='1'>");
@@ -38,7 +40,7 @@
                 out.println("<td>" + inventory.getSurplusType() + "</td>");
                 out.println("<td>" + inventory.getPrice() + "</td>");
                 // Add update button with inventory ID as parameter
-                out.println("<td><button onclick=\"window.location.href='UpdateInventoryServlet?inventoryId=" + inventory.getInventoryID() + "'\">Update</button></td>");
+                out.println("<td><button onclick=\"window.location.href='UpdateInventoryPage.jsp?inventoryId=" + inventory.getInventoryID() + "'\">Update</button></td>");
                 out.println("</tr>");
             }
             out.println("</table>");

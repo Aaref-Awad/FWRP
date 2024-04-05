@@ -15,8 +15,12 @@ public class RetailerInventoryBusinessLogic {
         return retailerInventoryDao.getAllInventories();
     }
     
-    public List<RetailerInventoryDTO> getInventoryById(int inventoryId){
+    public List<RetailerInventoryDTO> getInventoriesById(int inventoryId){
         return retailerInventoryDao.getInventoriesByUserId(inventoryId);
+    }
+    
+    public RetailerInventoryDTO getInventoryById(int inventoryId){
+        return retailerInventoryDao.getInventoryById(inventoryId);
     }
 
     public void addInventory(RetailerInventoryDTO inventory) {
