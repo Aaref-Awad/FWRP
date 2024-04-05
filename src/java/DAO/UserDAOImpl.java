@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DAO;
 
+import data.DataSource;
 import DTO.UserDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,10 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Owner
- */
 public class UserDAOImpl implements UserDAO {
     
     private static Connection con = DataSource.getInstance().getConnection();
@@ -45,13 +38,19 @@ public class UserDAOImpl implements UserDAO {
                 user.setEmail(email);
                 
                 String username = rs.getString("Username");
-                user.setEmail(username);
+                user.setUsername(username);
                 
                 String password = rs.getString("Password");
-                user.setEmail(password);
+                user.setPassword(password);
                 
-                boolean isSubbed = rs.getBoolean("IsSubed");
-                user.setIsSubed(isSubbed);
+                String phoneNumber = rs.getString("PhoneNumber"); // Get PhoneNumber
+                user.setPhoneNumber(phoneNumber);
+                
+                double balance = rs.getDouble("Balance"); // Get Balance
+                user.setBalance(balance);
+                
+                boolean isSubed = rs.getBoolean("IsSubed");
+                user.setIsSubed(isSubed);
               
                 users.add(user);
             }
@@ -90,15 +89,17 @@ public class UserDAOImpl implements UserDAO {
     }
     
     @Override
-    public UserDTO getUserByUsername(String username) {
+    public UserDTO getUserByLogin(String username, String password) {
         UserDTO user = null;
         try {
             pstmt = con.prepareStatement(
-                    "SELECT * FROM User WHERE Username = ?");
+                    "SELECT * FROM User WHERE Username = ? AND Password = ?");
             pstmt.setString(1, username);
+            pstmt.setString(2, password);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 user = new UserDTO();
+                user.setUserID(rs.getInt("UserID"));
                 user.setUserType(rs.getString("UserType"));
                 user.setEmail(rs.getString("Email"));
                 user.setUsername(rs.getString("Username"));
@@ -119,13 +120,15 @@ public class UserDAOImpl implements UserDAO {
             if (!userExists(user.getUsername())) {
 
                 pstmt = con.prepareStatement(
-                        "INSERT INTO User (UserType, Email, Username, Password, IsSubed) "
-                        + "VALUES( ?,?, ?, ?, ?)");
+                        "INSERT INTO User (UserType, Email, Username, Password, PhoneNumber, IsSubed, Balance) "
+                        + "VALUES( ?, ?, ?, ?, ?, ?, ?)");
                 pstmt.setString(1, user.getUserType());
                 pstmt.setString(2, user.getEmail());
                 pstmt.setString(3, user.getUsername());
                 pstmt.setString(4, user.getPassword());
-                pstmt.setBoolean(5, user.isIsSubed());
+                pstmt.setString(5, user.getPhoneNumber()); // Set PhoneNumber
+                pstmt.setBoolean(6, user.isIsSubed());
+                pstmt.setDouble(7, user.getBalance()); // Set Balance
                 pstmt.executeUpdate();
               
             } else {
@@ -141,13 +144,15 @@ public class UserDAOImpl implements UserDAO {
         try {
             
             pstmt = con.prepareStatement(
-                    "UPDATE User SET UserID=? , UserType=?, Email=?, Username=?, Password=?, IsSubed=? ");
+                    "UPDATE User SET UserID=?, UserType=?, Email=?, Username=?, Password=?, PhoneNumber=?, IsSubed=?, Balance=? ");
             pstmt.setInt(1, user.getUserID());
             pstmt.setString(2, user.getUserType());
             pstmt.setString(3, user.getEmail());
             pstmt.setString(4, user.getUsername());
             pstmt.setString(5, user.getPassword());
-            pstmt.setBoolean(6, user.isIsSubed());
+            pstmt.setString(6, user.getPhoneNumber()); // Set PhoneNumber
+            pstmt.setBoolean(7, user.isIsSubed());
+            pstmt.setDouble(8, user.getBalance()); // Set Balance
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
