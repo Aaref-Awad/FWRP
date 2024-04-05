@@ -4,24 +4,23 @@
  */
 package controller;
 
-
-import DTO.UserDTO;
+import DTO.RetailerInventoryDTO;
+import businesslayer.RetailerInventoryBusinessLogic;
 import businesslayer.UserBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 /**
  *
  * @author Aaref
  */
-public class LoginServlet extends HttpServlet {
+public class AddFoodItemServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +39,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
+            out.println("<title>Servlet AddFoodItemServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddFoodItemServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,42 +74,32 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
+        RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
+        RetailerInventoryDTO inventory = new RetailerInventoryDTO();
+        
+        // Assuming that the UserID is stored in the session
+        HttpSession session = request.getSession();
+        int userId = (Integer) session.getAttribute("userId");
+        String foodItem = request.getParameter("FoodName");
+        
         try{
-            UserDTO user = userBusinessLogic.getUserByLogin(username, password);
-            HttpSession session = request.getSession(); 
-            session.setAttribute("userId", user.getUserID());
-            session.setAttribute("userName", user.getUsername());
 
-            RequestDispatcher rd = null;
+            inventory.setUserID(userId);
+            inventory.setFoodAmount(Integer.parseInt(request.getParameter("FoodAmount")));
+            inventory.setExpirationDate(Date.valueOf(request.getParameter("ExpirationDate")));  
+            inventory.setSurplusType(request.getParameter("SurplusType"));
+            inventory.setFoodName(foodItem);
+            inventory.setPrice(0.0);
 
-            if (user.getPassword().equals(password)){
-                if (user.getUserType().equalsIgnoreCase("Consumer")){
-                    rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
-                    response.sendRedirect("views/ConsumerPage.jsp");
-                }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
-                     rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
-                     response.sendRedirect("views/ConsumerPage.jsp");
-                } else {
-                  rd = request.getRequestDispatcher("views/RetailerPage.jsp");
-                  response.sendRedirect("views/RetailerPage.jsp");
-                }
-            }
-
-            if (rd != null) {
-                rd.forward(request, response);
-            }
-
+            
+            retailerInventoryBusinessLogic.addInventory(inventory);
+            response.sendRedirect("views/RetailerPage.jsp");
         }catch(Exception e){
             e.printStackTrace();
+        }finally{
+
         }
     }
-
 
 
     /**

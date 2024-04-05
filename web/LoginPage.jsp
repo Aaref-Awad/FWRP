@@ -18,7 +18,7 @@
         <CENTER>
             <main>
                 <div>
-                    <form action="" method="post">
+                    <form action="LoginServlet" method="post">
 
                         <h1>Login</h1>
 

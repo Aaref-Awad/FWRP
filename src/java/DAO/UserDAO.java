@@ -15,6 +15,7 @@ public interface UserDAO {
      // CRUD operations
     public List<UserDTO> getAllUsers();
     public UserDTO getUserById(int userId);
+    public UserDTO getUserByLogin(String username, String password);
     public void insertUser(UserDTO user);
     public void updateUser(UserDTO user);
     public void deleteUser(UserDTO user);

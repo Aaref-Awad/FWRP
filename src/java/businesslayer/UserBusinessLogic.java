@@ -23,6 +23,10 @@ public class UserBusinessLogic {
     public List<UserDTO> getAllUsers() throws SQLException {
         return usersDao.getAllUsers();
     }
+    
+    public UserDTO getUserByLogin(String name, String password){
+        return usersDao.getUserByLogin(name, password);
+    }
 
     public void addUser(UserDTO user) {
         usersDao.insertUser(user);

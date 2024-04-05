@@ -4,24 +4,23 @@
  */
 package controller;
 
-
-import DTO.UserDTO;
-import businesslayer.UserBusinessLogic;
+//import DTO.InventoryDTO;
+//import businesslayer.InventoryBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 /**
  *
  * @author Aaref
  */
-public class LoginServlet extends HttpServlet {
+public class UpdateInventorServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +39,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
+            out.println("<title>Servlet UpdateInventorServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateInventorServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,11 +57,23 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+//    @Override
+//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        InventoryBusinessLogic inventoryBusinessLogic = new InventoryBusinessLogic();
+//        List<InventoryDTO> foodItems = null;
+//
+//        try {
+//            foodItems = inventoryBusinessLogic.getAllFoodItems();
+//        } catch (SQLException ex) {
+//            log(ex.getMessage());
+//        }
+//
+//        request.setAttribute("fooditems", foodItems);
+//
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("views/RetailerPage.jsp");
+//        dispatcher.forward(request, response);
+//    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -75,43 +86,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        try{
-            UserDTO user = userBusinessLogic.getUserByLogin(username, password);
-            HttpSession session = request.getSession(); 
-            session.setAttribute("userId", user.getUserID());
-            session.setAttribute("userName", user.getUsername());
-
-            RequestDispatcher rd = null;
-
-            if (user.getPassword().equals(password)){
-                if (user.getUserType().equalsIgnoreCase("Consumer")){
-                    rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
-                    response.sendRedirect("views/ConsumerPage.jsp");
-                }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
-                     rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
-                     response.sendRedirect("views/ConsumerPage.jsp");
-                } else {
-                  rd = request.getRequestDispatcher("views/RetailerPage.jsp");
-                  response.sendRedirect("views/RetailerPage.jsp");
-                }
-            }
-
-            if (rd != null) {
-                rd.forward(request, response);
-            }
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        processRequest(request, response);
     }
-
-
 
     /**
      * Returns a short description of the servlet.

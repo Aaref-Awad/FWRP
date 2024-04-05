@@ -1,37 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DTO;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
- * @author Owner
+ * @author Aaref
  */
-public class InventoryDTO {
-    private Integer FoodID;
+public class RetailerInventoryDTO {
+    private Integer InventoryID;
+    private Integer UserID;
     private String FoodName;
     private Integer FoodAmount;
-    private double Price;
+    private Double Price;
     private Date ExpirationDate;
     private String SurplusType;
 
-    public Integer getFoodID() {
-        return FoodID;
+    public Integer getInventoryID() {
+        return InventoryID;
     }
 
-    public void setFoodID(Integer FoodID) {
-        this.FoodID = FoodID;
+    public void setInventoryID(Integer InventoryID) {
+        this.InventoryID = InventoryID;
     }
 
-    public String getFoodName() {
-        return FoodName;
+    public Integer getUserID() {
+        return UserID;
     }
 
-    public void setFoodName(String FoodName) {
-        this.FoodName = FoodName;
+    public void setUserID(Integer UserID) {
+        this.UserID = UserID;
     }
 
     public Integer getFoodAmount() {
@@ -42,11 +39,11 @@ public class InventoryDTO {
         this.FoodAmount = FoodAmount;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return Price;
     }
 
-    public void setPrice(double Price) {
+    public void setPrice(Double Price) {
         this.Price = Price;
     }
 
@@ -64,5 +61,13 @@ public class InventoryDTO {
 
     public void setSurplusType(String SurplusType) {
         this.SurplusType = SurplusType;
+    }
+    
+        public String getFoodName() { // Getter for FoodName
+        return FoodName;
+    }
+
+    public void setFoodName(String FoodName) { // Setter for FoodName
+        this.FoodName = FoodName;
     }
 }
