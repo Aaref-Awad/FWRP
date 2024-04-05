@@ -87,24 +87,24 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("userId", user.getUserID());
             session.setAttribute("userName", user.getUsername());
 
-            RequestDispatcher rd = null;
+//            RequestDispatcher rd = null;
 
             if (user.getPassword().equals(password)){
                 if (user.getUserType().equalsIgnoreCase("Consumer")){
-                    rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
+//                    rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
                     response.sendRedirect("views/ConsumerPage.jsp");
                 }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
-                     rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
-                     response.sendRedirect("views/ConsumerPage.jsp");
+//                     rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
+                     response.sendRedirect("views/CharityOrgPage.jsp");
                 } else {
-                  rd = request.getRequestDispatcher("views/RetailerPage.jsp");
+//                  rd = request.getRequestDispatcher("views/RetailerPage.jsp");
                   response.sendRedirect("views/RetailerPage.jsp");
                 }
             }
 
-            if (rd != null) {
-                rd.forward(request, response);
-            }
+//            if (rd != null) {
+//                rd.forward(request, response);
+//            }
 
         }catch(Exception e){
             e.printStackTrace();

@@ -80,7 +80,6 @@ public class AddFoodItemServlet extends HttpServlet {
         // Assuming that the UserID is stored in the session
         HttpSession session = request.getSession();
         int userId = (Integer) session.getAttribute("userId");
-        String foodItem = request.getParameter("FoodName");
         
         try{
 
@@ -88,7 +87,7 @@ public class AddFoodItemServlet extends HttpServlet {
             inventory.setFoodAmount(Integer.parseInt(request.getParameter("FoodAmount")));
             inventory.setExpirationDate(Date.valueOf(request.getParameter("ExpirationDate")));  
             inventory.setSurplusType(request.getParameter("SurplusType"));
-            inventory.setFoodName(foodItem);
+            inventory.setFoodName(request.getParameter("FoodName"));
             inventory.setPrice(0.0);
 
             

@@ -26,4 +26,8 @@ public class RetailerInventoryBusinessLogic {
     public void addInventory(RetailerInventoryDTO inventory) {
         retailerInventoryDao.insertInventory(inventory);
     } 
+    
+    public void updateInventory(RetailerInventoryDTO inventory){
+        retailerInventoryDao.updateInventory(inventory);
+    }
 }
