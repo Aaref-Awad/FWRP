@@ -4,6 +4,7 @@
     Author     : Aaref, Luke
 --%>
 
+<%@page import="businesslayer.UserBusinessLogic"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DTO.CharityInventoryDTO"%>
 <%@page import="businesslayer.CharityInventoryBusinessLogic"%>
@@ -50,6 +51,9 @@
                     out.println("</tr>");
                 }
                 out.println("</table>");
+                
+                UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
+                userBusinessLogic.updateUserLastLogin(userId, new Date());
             }
         %>
     </main>
