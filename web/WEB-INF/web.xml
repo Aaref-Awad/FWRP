@@ -24,6 +24,11 @@
         <servlet-name>UpdateInventorServlet</servlet-name>
         <servlet-class>controller.UpdateInventorServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BuyFoodItemServlet</servlet-name>
+        <servlet-class>controller.BuyFoodItemServlet</servlet-class>
+    </servlet>
+
 
     <servlet-mapping>
         <servlet-name>FWRPServlet</servlet-name>
@@ -39,7 +44,7 @@
     </servlet-mapping>
     <servlet-mapping>
     <servlet-name>ClaimDonationServlet</servlet-name>
-    <url-pattern>/claimDonation</url-pattern>
+    <url-pattern>/ClaimDonationServlet</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -51,6 +56,10 @@
     <servlet-name>UpdateInventorServlet</servlet-name>
     <url-pattern>/UpdateInventorServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>BuyFoodItemServlet</servlet-name>
+    <url-pattern>/BuyFoodItemServlet</url-pattern>
+    </servlet-mapping>B
 
     <session-config>
         <session-timeout>
