@@ -4,6 +4,7 @@
     Author     : Aaref, Luke
 --%>
 
+<%@page import="java.util.Date"%>
 <%@page import="businesslayer.UserBusinessLogic"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DTO.CharityInventoryDTO"%>
