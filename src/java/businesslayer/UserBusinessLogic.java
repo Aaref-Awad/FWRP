@@ -7,6 +7,7 @@ package businesslayer;
 import DAO.UserDAOImpl;
 import DTO.UserDTO;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,5 +31,9 @@ public class UserBusinessLogic {
 
     public void addUser(UserDTO user) {
         usersDao.insertUser(user);
-    } 
+    }
+    
+    public void updateUserLastLogin(int userId, Date lastLogin){
+        usersDao.updateUserLastLogin(userId, lastLogin);
+    }
 }

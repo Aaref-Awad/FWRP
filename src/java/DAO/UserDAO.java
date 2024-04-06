@@ -5,6 +5,7 @@
 package DAO;
 
 import DTO.UserDTO;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,4 +20,6 @@ public interface UserDAO {
     public void insertUser(UserDTO user);
     public void updateUser(UserDTO user);
     public void deleteUser(UserDTO user);
+    public void updateUserLastLogin(int userId, Date lastLogin);
+
 }
