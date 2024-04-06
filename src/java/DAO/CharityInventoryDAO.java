@@ -4,8 +4,7 @@ import DTO.CharityInventoryDTO;
 import java.util.List;
 
 /**
- *
- * @author Aaref
+ * DAO Interface for Charity Inventory
  */
 public interface CharityInventoryDAO {
     // CRUD operations

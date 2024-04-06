@@ -2,6 +2,7 @@ package businesslayer;
 
 import DAO.CharityInventoryDAOImpl;
 import DTO.CharityInventoryDTO;
+import DTO.RetailerInventoryDTO;
 import java.util.List;
 
 public class CharityInventoryBusinessLogic {
@@ -21,5 +22,8 @@ public class CharityInventoryBusinessLogic {
 
     public void addInventory(CharityInventoryDTO inventory) {
         charityInventoryDao.insertInventory(inventory);
-    } 
+    }
+    public void updateInventory(CharityInventoryDTO inventory){
+        charityInventoryDao.updateInventory(inventory);
+    }
 }

@@ -4,24 +4,26 @@
  */
 package controller;
 
-
+import DTO.RetailerInventoryDTO;
 import DTO.UserDTO;
+import businesslayer.RetailerInventoryBusinessLogic;
 import businesslayer.UserBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.sql.Date;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 /**
  *
  * @author Aaref
  */
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "BuyFoodItemServlet", urlPatterns = {"/BuyFoodItemServlet"})
+public class BuyFoodItemServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +42,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
+            out.println("<title>Servlet BuyFoodItemServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BuyFoodItemServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,36 +77,31 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
-
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
+        
         try{
-            UserDTO user = userBusinessLogic.getUserByLogin(username, password);
-            HttpSession session = request.getSession(); 
-            session.setAttribute("userId", user.getUserID());
-            session.setAttribute("userName", user.getUsername());
-            session.setAttribute("password", user.getPassword());
-
-            if (user.getPassword().equals(password)){
-                if (user.getUserType().equalsIgnoreCase("Consumer")){
-                    response.sendRedirect("views/ConsumerPage.jsp");
-                }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
-                     response.sendRedirect("views/CharityOrgPage.jsp");
-                } else if(user.getUserType().equalsIgnoreCase("Retailer")) {
-                  response.sendRedirect("views/RetailerPage.jsp");
-                }
+            // Create a RetailerInventoryDTO object with updated information
+            RetailerInventoryDTO updatedInventory = new RetailerInventoryDTO();
+            if (userId != null) {
+                updatedInventory.setUserID(userId);
             }
 
+            // Update inventory in the database
+            RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
+            updatedInventory = retailerInventoryBusinessLogic.getInventoryById(Integer.parseInt(request.getParameter("inventoryId")));
+            updatedInventory.setFoodAmount(updatedInventory.getFoodAmount()-1);
+            retailerInventoryBusinessLogic.updateInventory(updatedInventory);
+            // Redirect back to the UpdateInventoryPage or any other appropriate page
+             
 
+            response.sendRedirect("views/ConsumerPage.jsp");
         }catch(Exception e){
             e.printStackTrace();
+        }finally{
+
         }
     }
-
-
 
     /**
      * Returns a short description of the servlet.
