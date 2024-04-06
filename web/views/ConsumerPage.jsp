@@ -1,3 +1,4 @@
+<%@page import="businesslayer.UserBusinessLogic"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="businesslayer.RetailerInventoryBusinessLogic"%>
 <%@page import="DTO.RetailerInventoryDTO"%>
@@ -45,6 +46,9 @@
                     out.println("</tr>");
                 }
                 out.println("</table>");
+                
+                UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
+                userBusinessLogic.updateUserLastLogin(userId, new Date());
             }
         %>
     </main>
