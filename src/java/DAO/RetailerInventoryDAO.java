@@ -1,6 +1,7 @@
 package DAO;
 
 import DTO.RetailerInventoryDTO;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,4 +16,6 @@ public interface RetailerInventoryDAO {
     public void insertInventory(RetailerInventoryDTO inventory);
     public void updateInventory(RetailerInventoryDTO inventory);
     public void deleteInventory(RetailerInventoryDTO inventory);
+    public boolean isFoodNameAlreadyExists(String foodName);
+    public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate);
 }

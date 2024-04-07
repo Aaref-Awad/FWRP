@@ -13,8 +13,8 @@
         <servlet-class>controller.LoginServlet</servlet-class>
     </servlet>
     <servlet>
-    <servlet-name>ClaimDonationServlet</servlet-name>
-    <servlet-class>controller.ClaimDonationServlet</servlet-class>
+        <servlet-name>ClaimDonationServlet</servlet-name>
+        <servlet-class>controller.ClaimDonationServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddFoodItemServlet</servlet-name>
@@ -30,6 +30,10 @@
     </servlet>
 
 
+    <servlet>
+        <servlet-name>GetNewlyAddedItemsServlet</servlet-name>
+        <servlet-class>controller.GetNewlyAddedItemsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FWRPServlet</servlet-name>
         <url-pattern>/FWRPServlet</url-pattern>
@@ -43,8 +47,8 @@
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-    <servlet-name>ClaimDonationServlet</servlet-name>
-    <url-pattern>/ClaimDonationServlet</url-pattern>
+        <servlet-name>ClaimDonationServlet</servlet-name>
+        <url-pattern>/ClaimDonationServlet</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
@@ -53,14 +57,19 @@
     </servlet-mapping>
     
     <servlet-mapping>
-    <servlet-name>UpdateInventorServlet</servlet-name>
-    <url-pattern>/UpdateInventorServlet</url-pattern>
+        <servlet-name>UpdateInventorServlet</servlet-name>
+        <url-pattern>/UpdateInventorServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-    <servlet-name>BuyFoodItemServlet</servlet-name>
-    <url-pattern>/BuyFoodItemServlet</url-pattern>
+        <servlet-name>BuyFoodItemServlet</servlet-name>
+        <url-pattern>/BuyFoodItemServlet</url-pattern>
     </servlet-mapping>B
 
+    
+    <servlet-mapping>
+        <servlet-name>GetNewlyAddedItemsServlet</servlet-name>
+        <url-pattern>/GetNewlyAddedItemsServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

@@ -11,6 +11,7 @@ public class CharityInventoryDTO {
     private Integer quantity;
     private String foodName;
     private Date expirationDate;
+    private Date itemAdded; // Added attribute
 
     public Integer getInventoryID() {
         return inventoryID;
@@ -50,5 +51,13 @@ public class CharityInventoryDTO {
 
     public void setExpirationDate(Date expirationDate) {
         this.expirationDate = expirationDate;
+    }
+    
+    public Date getItemAdded() {
+        return itemAdded;
+    }
+
+    public void setItemAdded(Date itemAdded) {
+        this.itemAdded = itemAdded;
     }
 }
