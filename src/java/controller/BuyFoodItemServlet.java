@@ -5,12 +5,14 @@
 package controller;
 
 import DTO.RetailerInventoryDTO;
+import DTO.UserDTO;
 import businesslayer.RetailerInventoryBusinessLogic;
 import businesslayer.UserBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Aaref
  */
-public class AddFoodItemServlet extends HttpServlet {
+@WebServlet(name = "BuyFoodItemServlet", urlPatterns = {"/BuyFoodItemServlet"})
+public class BuyFoodItemServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +42,10 @@ public class AddFoodItemServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddFoodItemServlet</title>");            
+            out.println("<title>Servlet BuyFoodItemServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddFoodItemServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BuyFoodItemServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -74,32 +77,31 @@ public class AddFoodItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
-        RetailerInventoryDTO inventory = new RetailerInventoryDTO();
-        
-        // Assuming that the UserID is stored in the session
         HttpSession session = request.getSession();
-        int userId = (Integer) session.getAttribute("userId");
+        Integer userId = (Integer) session.getAttribute("userId");
         
         try{
+            // Create a RetailerInventoryDTO object with updated information
+            RetailerInventoryDTO updatedInventory = new RetailerInventoryDTO();
+            if (userId != null) {
+                updatedInventory.setUserID(userId);
+            }
 
-            inventory.setUserID(userId);
-            inventory.setFoodAmount(Integer.parseInt(request.getParameter("FoodAmount")));
-            inventory.setExpirationDate(Date.valueOf(request.getParameter("ExpirationDate")));  
-            inventory.setSurplusType(request.getParameter("SurplusType"));
-            inventory.setFoodName(request.getParameter("FoodName"));
-            inventory.setPrice(0.0);
+            // Update inventory in the database
+            RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
+            updatedInventory = retailerInventoryBusinessLogic.getInventoryById(Integer.parseInt(request.getParameter("inventoryId")));
+            updatedInventory.setFoodAmount(updatedInventory.getFoodAmount()-1);
+            retailerInventoryBusinessLogic.updateInventory(updatedInventory);
+            // Redirect back to the UpdateInventoryPage or any other appropriate page
+             
 
-            
-            retailerInventoryBusinessLogic.addInventory(inventory);
-            response.sendRedirect("views/RetailerPage.jsp");
+            response.sendRedirect("views/ConsumerPage.jsp");
         }catch(Exception e){
             e.printStackTrace();
         }finally{
 
         }
     }
-
 
     /**
      * Returns a short description of the servlet.

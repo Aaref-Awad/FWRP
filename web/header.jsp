@@ -24,7 +24,10 @@
 </head>
 <body>
 <header class="header-bar">
-    <div>User Name:</div>
+    <div>
+        User Name:
+        <input type="hidden" name="UserId" value=<%= session.getAttribute("userId")%>>
+    </div>
     <div><a href="../LogoutServlet">Logout</a></div>
 </header>
 <main>

@@ -62,6 +62,7 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
             while (rs.next()) {
                 inventory = new RetailerInventoryDTO();
                 inventory.setUserID(rs.getInt("UserID"));
+                inventory.setInventoryID(inventoryId);
                 inventory.setFoodName(rs.getString("FoodName"));
                 inventory.setFoodAmount(rs.getInt("FoodAmount"));
                 inventory.setPrice(rs.getDouble("Price"));
@@ -129,13 +130,14 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         try {
             
             pstmt = con.prepareStatement(
-                    "UPDATE RetailerInventory SET UserID=?, FoodAmount=?, Price=?, ExpirationDate=?, SurplusType=? WHERE InventoryID=?");
+                    "UPDATE RetailerInventory SET UserID=?, FoodAmount=?, FoodName=?, Price=?, ExpirationDate=?, SurplusType=? WHERE InventoryID=?");
             pstmt.setInt(1, inventory.getUserID());
             pstmt.setInt(2, inventory.getFoodAmount());
-            pstmt.setDouble(3, inventory.getPrice());
-            pstmt.setDate(4, new java.sql.Date(inventory.getExpirationDate().getTime()));
-            pstmt.setString(5, inventory.getSurplusType());
-            pstmt.setInt(6, inventory.getInventoryID());
+            pstmt.setString(3, inventory.getFoodName());
+            pstmt.setDouble(4, inventory.getPrice());
+            pstmt.setDate(5, new java.sql.Date(inventory.getExpirationDate().getTime()));
+            pstmt.setString(6, inventory.getSurplusType());
+            pstmt.setInt(7, inventory.getInventoryID());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

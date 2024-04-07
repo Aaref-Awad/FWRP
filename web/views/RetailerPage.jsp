@@ -1,7 +1,10 @@
+<%@page import="businesslayer.UserBusinessLogic"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="businesslayer.RetailerInventoryBusinessLogic"%>
 <%@page import="DTO.RetailerInventoryDTO"%>
 <%@page import="java.util.List"%>
+<%@page import="java.util.Date"%> <!-- Add import for Date -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +15,6 @@
     <header>
         <%@ include file="../header.jsp" %>
     </header>
-
 
 <main>
     <button onclick="window.location.href='AddRetailerFoodItem.jsp'">Go to Add Retailer Food Item Page</button>
@@ -44,6 +46,10 @@
                 out.println("</tr>");
             }
             out.println("</table>");
+
+            // Update last login after displaying the table
+            UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
+            userBusinessLogic.updateUserLastLogin(userId, new Date());
         }
     %>
 </main>

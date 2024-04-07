@@ -7,6 +7,10 @@ package controller;
 //import DAO.InventoryDAO;
 //import DAO.InventoryDAOImpl;
 //import DTO.InventoryDTO;
+import DTO.CharityInventoryDTO;
+import DTO.RetailerInventoryDTO;
+import businesslayer.CharityInventoryBusinessLogic;
+import businesslayer.RetailerInventoryBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -15,45 +19,49 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Luke
  */
-@WebServlet(name = "ClaimDonationServlet", urlPatterns = {"/claimDonation"})
+@WebServlet(name = "ClaimDonationServlet", urlPatterns = {"/ClaimDonationServlet"})
 public class ClaimDonationServlet extends HttpServlet {
 
-//    @Override
-//protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//    String[] foodIds = request.getParameterValues("foodId"); // Assuming "foodId" is the name of your checkboxes
-//    if (foodIds != null) {
-//        InventoryDAO inventoryDAO = new InventoryDAOImpl(); // Instantiate your DAO
-//        for (String foodId : foodIds) {
-//            
-//            int foodIdInt = Integer.parseInt(foodId); // Convert the foodId to an int if needed
-//            InventoryDTO food = inventoryDAO.getFoodById(foodIdInt); // Get the food item from the database
-//            if (food != null) {
-//                
-//                // Update the food item as needed
-//                food.setFoodAmount(food.getFoodAmount() + 1);
-//                inventoryDAO.updateFood(food); // Update the food item in the database
-//            }
-//        }
-//    }
-//    // Redirect back to the charitable organization page
-//    response.sendRedirect("/views/CharityOrgPage.jsp");
-//}
-//
-//
-//    @Override
-//protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//        throws ServletException, IOException {
-//    InventoryDAO inventoryDAO = new InventoryDAOImpl(); // Instantiate your DAO
-//    List<InventoryDTO> donations = inventoryDAO.getAllFoodItems(); // Assuming you have a method to retrieve all available donations
-//
-//    request.setAttribute("donations", donations);
-//    request.getRequestDispatcher("/views/CharityOrgPage.jsp").forward(request, response);
-//}
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
+        
+        try{
+            // Create a RetailerInventoryDTO object with updated information
+            CharityInventoryDTO updatedInventory = new CharityInventoryDTO();
+            if (userId != null) {
+                updatedInventory.setCharityID(userId);
+            }
+
+            // Update inventory in the database
+            CharityInventoryBusinessLogic charityInventoryBusinessLogic = new CharityInventoryBusinessLogic();
+            updatedInventory = charityInventoryBusinessLogic.getInventoryById(Integer.parseInt(request.getParameter("inventoryId")));
+            updatedInventory.setQuantity(updatedInventory.getQuantity()-1);
+            charityInventoryBusinessLogic.updateInventory(updatedInventory);
+            // Redirect back to the UpdateInventoryPage or any other appropriate page
+             
+
+            response.sendRedirect("views/CharityOrgPage.jsp");
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+
+        }
+    }
+
+
+        @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+    }
 
 
     @Override
