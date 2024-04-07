@@ -2,6 +2,7 @@ package businesslayer;
 
 import DAO.RetailerInventoryDAOImpl;
 import DTO.RetailerInventoryDTO;
+import java.util.Date;
 import java.util.List;
 
 public class RetailerInventoryBusinessLogic {
@@ -29,5 +30,13 @@ public class RetailerInventoryBusinessLogic {
     
     public void updateInventory(RetailerInventoryDTO inventory){
         retailerInventoryDao.updateInventory(inventory);
+    }
+    
+    public boolean isFoodNameAlreadyExists(String foodName){
+        return retailerInventoryDao.isFoodNameAlreadyExists(foodName);
+    }
+    
+    public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate) {
+        return retailerInventoryDao.getNewlyAddedItems(userId, lastLoginDate);
     }
 }
