@@ -116,7 +116,7 @@ public class UserDAOImpl implements UserDAO {
                 pstmt.setString(5, user.getPhoneNumber());
                 pstmt.setBoolean(6, user.isSubed());
                 pstmt.setDouble(7, user.getBalance());
-                pstmt.setTimestamp(8, new java.sql.Timestamp(user.getLastLogin().getTime())); // Set LastLogin
+                pstmt.setTimestamp(8, new java.sql.Timestamp(System.currentTimeMillis())); // Set LastLogin
                 pstmt.executeUpdate();
 
             } else {

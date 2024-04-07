@@ -36,6 +36,7 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
                 inventory.setQuantity(rs.getInt("Quantity"));
                 inventory.setFoodName(rs.getString("FoodName"));
                 inventory.setExpirationDate(rs.getDate("ExpirationDate"));
+                inventory.setItemAdded(rs.getTimestamp("ItemAdded")); // Set the itemAdded attribute
                 inventories.add(inventory);
             }
         } catch (SQLException e) {
@@ -60,6 +61,7 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
                 inventory.setQuantity(rs.getInt("Quantity"));
                 inventory.setFoodName(rs.getString("FoodName"));
                 inventory.setExpirationDate(rs.getDate("ExpirationDate"));
+                inventory.setItemAdded(rs.getTimestamp("ItemAdded")); // Set the itemAdded attribute
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -83,6 +85,7 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
                 inventory.setQuantity(rs.getInt("Quantity"));
                 inventory.setFoodName(rs.getString("FoodName"));
                 inventory.setExpirationDate(rs.getDate("ExpirationDate"));
+                inventory.setItemAdded(rs.getTimestamp("ItemAdded")); // Set the itemAdded attribute
                 inventories.add(inventory);
             }
         } catch (SQLException e) {
@@ -95,12 +98,13 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
     public void insertInventory(CharityInventoryDTO inventory) {
         try {
             pstmt = con.prepareStatement(
-                    "INSERT INTO CharityInventory (CharityID, Quantity, FoodName, ExpirationDate) "
-                            + "VALUES(?, ?, ?, ?)");
+                    "INSERT INTO CharityInventory (CharityID, Quantity, FoodName, ExpirationDate, ItemAdded) "
+                            + "VALUES(?, ?, ?, ?, ?)");
             pstmt.setInt(1, inventory.getCharityID());
             pstmt.setInt(2, inventory.getQuantity());
             pstmt.setString(3, inventory.getFoodName());
             pstmt.setDate(4, new java.sql.Date(inventory.getExpirationDate().getTime()));
+            pstmt.setTimestamp(5, new java.sql.Timestamp(System.currentTimeMillis())); // Use current timestamp for itemAdded
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,12 +115,13 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
     public void updateInventory(CharityInventoryDTO inventory) {
         try {
             pstmt = con.prepareStatement(
-                    "UPDATE CharityInventory SET CharityID=?, Quantity=?, FoodName=?, ExpirationDate=? WHERE InventoryID=?");
+                    "UPDATE CharityInventory SET CharityID=?, Quantity=?, FoodName=?, ExpirationDate=?, ItemAdded=? WHERE InventoryID=?");
             pstmt.setInt(1, inventory.getCharityID());
             pstmt.setInt(2, inventory.getQuantity());
             pstmt.setString(3, inventory.getFoodName());
             pstmt.setDate(4, new java.sql.Date(inventory.getExpirationDate().getTime()));
-            pstmt.setInt(5, inventory.getInventoryID());
+            pstmt.setTimestamp(5, new java.sql.Timestamp(System.currentTimeMillis())); // Use current timestamp for itemAdded
+            pstmt.setInt(6, inventory.getInventoryID());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
