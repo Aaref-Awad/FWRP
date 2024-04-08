@@ -94,6 +94,7 @@ public class RegistrationServlet extends HttpServlet {
             userBusinessLogic.addUser(user);
             session.setAttribute("userId", userBusinessLogic.getUserByLogin(user.getUsername(), user.getPassword()).getUserID());
             session.setAttribute("userName", user.getUsername());
+            session.setAttribute("password", user.getPassword());
             
             if (user.getUserType().equalsIgnoreCase("Consumer")){
                     response.sendRedirect("views/ConsumerPage.jsp");
