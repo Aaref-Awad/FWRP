@@ -177,7 +177,18 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         return exists;
     }
         
-
+    @Override
+    public void updateInventoryFoodAmount(RetailerInventoryDTO inventory) {
+        try {
+            pstmt = con.prepareStatement(
+                    "UPDATE RetailerInventory SET FoodAmount=? WHERE InventoryID=?");
+            pstmt.setInt(1, inventory.getFoodAmount());
+            pstmt.setInt(2, inventory.getInventoryID());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override
@@ -228,5 +239,5 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
 
            return newlyAddedItems;
        }
-    }
+}
 

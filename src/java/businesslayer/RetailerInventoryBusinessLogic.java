@@ -39,4 +39,7 @@ public class RetailerInventoryBusinessLogic {
     public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate) {
         return retailerInventoryDao.getNewlyAddedItems(userId, lastLoginDate);
     }
+    public void updateInventoryFoodAmount(RetailerInventoryDTO inventory){
+        retailerInventoryDao.updateInventoryFoodAmount(inventory);
+    }
 }
