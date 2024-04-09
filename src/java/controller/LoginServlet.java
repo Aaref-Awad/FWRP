@@ -78,33 +78,33 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
 
         UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
-
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        UserDTO user = userBusinessLogic.getUserByLogin(username, password);
 
-        try{
-            UserDTO user = userBusinessLogic.getUserByLogin(username, password);
-            HttpSession session = request.getSession(); 
-            session.setAttribute("userId", user.getUserID());
-            session.setAttribute("userName", user.getUsername());
-            session.setAttribute("password", user.getPassword());
+        if (user != null) {
+            try {
+                HttpSession session = request.getSession();
+                session.setAttribute("userId", user.getUserID());
+                session.setAttribute("userName", user.getUsername());
+                session.setAttribute("password", user.getPassword());
 
-            if (user.getPassword().equals(password)){
-                if (user.getUserType().equalsIgnoreCase("Consumer")){
+                if (user.getUserType().equalsIgnoreCase("Consumer")) {
                     response.sendRedirect("views/ConsumerPage.jsp");
-                }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
-                     response.sendRedirect("views/CharityOrgPage.jsp");
-                } else if(user.getUserType().equalsIgnoreCase("Retailer")) {
-                  response.sendRedirect("views/RetailerPage.jsp");
+                } else if (user.getUserType().equalsIgnoreCase("Charitable Organization")) {
+                    response.sendRedirect("views/CharityOrgPage.jsp");
+                } else if (user.getUserType().equalsIgnoreCase("Retailer")) {
+                    response.sendRedirect("views/RetailerPage.jsp");
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-
-        }catch(Exception e){
-            e.printStackTrace();
+        } else {
+            // User does not exist in the database, display error message
+            request.setAttribute("errMessage", "Invalid user credentials");
+            request.getRequestDispatcher("/LoginPage.jsp").forward(request, response);
         }
     }
-
 
 
     /**

@@ -10,6 +10,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script>
+        function validatePassword() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("password2").value;
+            if (password != confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        }
+    </script>
     </head>
     <body>
         <header>
@@ -17,7 +28,7 @@
         </header>
         <main>
             <div>
-                <form action="RegistrationServlet" method="post">
+                <form action="RegistrationServlet" method="post" onsubmit="return validatePassword()">
                     
                     <h1>Register</h1>
                     
