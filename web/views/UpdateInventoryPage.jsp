@@ -15,6 +15,13 @@
 
     </header>
     <main>
+        
+        <% 
+            if (session.getAttribute("userId") == null) {
+                response.sendRedirect("../LoginPage.jsp");
+            }
+        %>
+        
          <h1>Update Inventory</h1>
         <% 
             // Retrieve inventory ID from the URL parameter
