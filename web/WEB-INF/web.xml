@@ -34,6 +34,14 @@
         <servlet-name>GetNewlyAddedItemsServlet</servlet-name>
         <servlet-class>controller.GetNewlyAddedItemsServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateSubscriptionServlet</servlet-name>
+        <servlet-class>controller.UpdateSubscriptionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateFavoriteServlet</servlet-name>
+        <servlet-class>controller.UpdateFavoriteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FWRPServlet</servlet-name>
         <url-pattern>/FWRPServlet</url-pattern>
@@ -69,6 +77,14 @@
     <servlet-mapping>
         <servlet-name>GetNewlyAddedItemsServlet</servlet-name>
         <url-pattern>/GetNewlyAddedItemsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSubscriptionServlet</servlet-name>
+        <url-pattern>/UpdateSubscriptionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateFavoriteServlet</servlet-name>
+        <url-pattern>/UpdateFavoriteServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,3 +1,5 @@
+<%@page import="businesslayer.FavoriteInventoryBusinessLogic"%>
+<%@page import="DTO.FavoriteInventoryDTO"%>
 <%@page import="DTO.UserDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
@@ -47,75 +49,104 @@
     <main>
         <!-- Button to trigger the popup -->
         <button id="showNewItems" onclick="showPopup()">Show Newly Added Items</button>
-        
+
         <!-- Hidden popup -->
         <div id="popup">
             <button id="closePopup" onclick="closePopup()">Close</button>
             <div id="popupContent">
-                 <%
-                  Integer userId = (Integer) session.getAttribute("userId");
-                  String username = (String) session.getAttribute("userName");
-                  String password = (String) session.getAttribute("password");
+                <% 
+                Integer userId = (Integer) session.getAttribute("userId");
+                String username = (String) session.getAttribute("userName");
+                String password = (String) session.getAttribute("password");
 
-                  UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
-                  UserDTO user = userBusinessLogic.getUserByLogin(username, password);
-                  
-                  // Fetch newly added items from servlet
-                  RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
-                  List<RetailerInventoryDTO> items = retailerInventoryBusinessLogic.getNewlyAddedItems(userId, user.getLastLogin());
+                UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
+                UserDTO user = userBusinessLogic.getUserByLogin(username, password);
 
-                  if (items.isEmpty()) {
-              %>
-                  <p>No newly added items.</p>
-              <% } else {
-                  for (RetailerInventoryDTO item : items) {
-              %>
-                      <div>
-                          <p>Food Name: <%= item.getFoodName() %></p>
-                          <p>Food Amount: <%= item.getFoodAmount() %></p>
-                          <p>Expiration Date: <%= item.getExpirationDate() %></p>
-                          <p>Price: <%= item.getPrice() %></p>
-                      </div>
-              <%  }
-                 }
-                 userBusinessLogic.updateUserLastLogin(userId, new Date());
-              %>
+                // Fetch newly added items from servlet
+                RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
+                List<RetailerInventoryDTO> items = retailerInventoryBusinessLogic.getNewlyAddedItems(userId, user.getLastLogin());
+
+                if (items.isEmpty()) { %>
+                    <p>No newly added items.</p>
+                <% } else {
+                    for (RetailerInventoryDTO item : items) { %>
+                        <div>
+                            <p>Food Name: <%= item.getFoodName() %></p>
+                            <p>Food Amount: <%= item.getFoodAmount() %></p>
+                            <p>Expiration Date: <%= item.getExpirationDate() %></p>
+                            <p>Price: <%= item.getPrice() %></p>
+                        </div>
+                <%  }
+                }
+                userBusinessLogic.updateUserLastLogin(userId, new Date());
+                %>
             </div>
         </div>
-        <%
-            // Check if UserId is null in the session, if yes, redirect to LoginPage.jsp
-            if (session.getAttribute("userId") == null) {
-                response.sendRedirect("../LoginPage.jsp");
-            } else {
-                // Get the user ID from the session
 
-                // Retrieve inventories related to the current user
-                List<RetailerInventoryDTO> inventories = retailerInventoryBusinessLogic.getAllInventories();
-                
-                // Display the inventories in a table
-                out.println("<table border='1'>");
-                out.println("<th>Food Name</th><th>Food Amount</th><th>Expiration Date</th><th>Price</th><th>Retailer</th><th>Purchase</th></tr>");
-                for (RetailerInventoryDTO inventory : inventories) {
-                    user = userBusinessLogic.getUserById(inventory.getUserID());
-                    out.println("<tr>");
-                    out.println("<td>" + inventory.getFoodName() + "</td>");
-                    out.println("<td>" + inventory.getFoodAmount() + "</td>");
-                    out.println("<td>" + inventory.getExpirationDate() + "</td>");
-                    out.println("<td>" + inventory.getPrice() + "</td>");
-                    out.println("<td>" + user.getUsername() + "</td>");
-                    // Add update button with inventory ID as parameter
-                    out.println("<td>");
-                    out.println("<form action='../BuyFoodItemServlet' method='post'>");
-                    out.println("<input type='hidden' name='inventoryId' value='" + inventory.getInventoryID() + "' />");
-                    out.println("<input type='submit' value='Buy' />");
-                    out.println("</form>");
-                    out.println("</td>");
-                    out.println("</tr>");
-                }
-                out.println("</table>");
-            }
+        <% 
+        // Check if UserId is null in the session, if yes, redirect to LoginPage.jsp
+        if (session.getAttribute("userId") == null) {
+            response.sendRedirect("../LoginPage.jsp");
+        } else {
+            // Get the user ID from the session
+
+            // Retrieve inventories related to the current user
+            List<RetailerInventoryDTO> inventories = retailerInventoryBusinessLogic.getAllInventories();
+            UserDTO currentUser = userBusinessLogic.getUserById((Integer) session.getAttribute("userId"));
         %>
+            <!-- Display the inventories in a table -->
+            <table border='1'>
+                <th>Food Name</th><th>Food Amount</th><th>Expiration Date</th><th>Price</th><th>Retailer</th><th>Purchase</th><th>Favorite</th>
+                <% for (RetailerInventoryDTO inventory : inventories) {
+                    user = userBusinessLogic.getUserById(inventory.getUserID());
+                    
+                    FavoriteInventoryBusinessLogic favoriteInventoryBusinessLogic = new FavoriteInventoryBusinessLogic();
+                %>
+                    <tr>
+                        <td><%= inventory.getFoodName() %></td>
+                        <td><%= inventory.getFoodAmount() %></td>
+                        <td><%= inventory.getExpirationDate() %></td>
+                        <td><%= inventory.getPrice() %></td>
+                        <td><%= user.getUsername() %></td>
+                        <!-- Add update button with inventory ID as parameter -->
+                        <td>
+                            <form action='../BuyFoodItemServlet' method='post'>
+                                <input type='hidden' name='inventoryId' value='<%= inventory.getInventoryID() %>' />
+                                <input type='submit' value='Buy' />
+                            </form>
+                        </td>
+                        <!-- Checkbox for favorite -->
+                        <td>
+                            <form action='../UpdateFavoriteServlet' method='post'>
+                                <input type='hidden' name='inventoryId' value='<%= inventory.getInventoryID() %>' />
+                                <input type='hidden' name='FoodName' value='<%= inventory.getFoodName() %>' />
+                                <input type='hidden' name='RetailerName' value='<%= user.getUsername() %>' />
+                                <input type='checkbox' name='favorite' onchange="this.form.submit()" id='favoriteCheckbox<%= inventory.getInventoryID() %>'
+                                <% if (favoriteInventoryBusinessLogic.isFavorite(inventory.getInventoryID(), currentUser.getUserID())) { %>
+                                    checked
+                                <% } %>
+                                />
+                            </form>
+                        </td>
+                    </tr>
+                <% } %>
+            </table>
+
+            <!-- Subscription button -->
+            <form action='../UpdateSubscriptionServlet' method='post'>
+                <% if (user.isSubed()) { %>
+                    <input type='hidden' name='userId' value='<%= userId %>' />
+                    <input type='hidden' name='isSubscribed' value='false' />
+                    <input type='submit' value='Unsubscribe' />
+                <% } else { %>
+                    <input type='hidden' name='userId' value='<%= userId %>' />
+                    <input type='hidden' name='isSubscribed' value='true' />
+                    <input type='submit' value='Subscribe' />
+                <% } %>
+            </form>
+        <% } %>
     </main>
+
 
     <footer>
 

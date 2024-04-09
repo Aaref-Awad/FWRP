@@ -40,4 +40,8 @@ public class UserBusinessLogic {
     public void updateUserLastLogin(int userId, Date lastLogin){
         usersDao.updateUserLastLogin(userId, lastLogin);
     }
+    
+    public void updateUser(UserDTO user){
+        usersDao.updateUser(user);
+    }
 }
