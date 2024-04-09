@@ -42,7 +42,7 @@
                     out.println("<td>" + inventory.getFoodName() + "</td>");
                     out.println("<td>" + inventory.getQuantity() + "</td>");
                     out.println("<td>" + inventory.getExpirationDate() + "</td>");
-                    // Add update button with inventory ID as parameter
+                    // Add claim button with inventory ID as parameter
                     out.println("<td>");
                     out.println("<form action='../ClaimDonationServlet' method='post'>");
                     out.println("<input type='hidden' name='inventoryId' value='" + inventory.getInventoryID() + "' />");
