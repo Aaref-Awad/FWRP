@@ -5,6 +5,7 @@
 package controller;
 
 import DTO.RetailerInventoryDTO;
+import businesslayer.CharityInventoryBusinessLogic;
 import businesslayer.RetailerInventoryBusinessLogic;
 import businesslayer.UserBusinessLogic;
 import java.io.IOException;
@@ -76,7 +77,7 @@ public class AddFoodItemServlet extends HttpServlet {
             throws ServletException, IOException {
         RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
         RetailerInventoryDTO inventory = new RetailerInventoryDTO();
-        
+        CharityInventoryBusinessLogic charityInventoryBusinessLogic = new CharityInventoryBusinessLogic();
         // Assuming that the UserID is stored in the session
         HttpSession session = request.getSession();
         int userId = (Integer) session.getAttribute("userId");
@@ -88,10 +89,12 @@ public class AddFoodItemServlet extends HttpServlet {
             inventory.setExpirationDate(Date.valueOf(request.getParameter("ExpirationDate")));  
             inventory.setSurplusType(request.getParameter("SurplusType"));
             inventory.setFoodName(request.getParameter("FoodName"));
-            inventory.setPrice(0.0);
-
-            
-            retailerInventoryBusinessLogic.addInventory(inventory);
+            inventory.setPrice(0.0); 
+            if (inventory.getSurplusType().equals("Charity") && retailerInventoryBusinessLogic.isSurPlus(inventory) && !(charityInventoryBusinessLogic.isCharityFoodNameAndRetailerExists(inventory.getFoodName() ,inventory.getUserID())) ){ 
+                charityInventoryBusinessLogic.addRetailerInventory(inventory);
+            }else{
+                retailerInventoryBusinessLogic.addInventory(inventory);
+            }
             response.sendRedirect("views/RetailerPage.jsp");
         }catch(Exception e){
             e.printStackTrace();

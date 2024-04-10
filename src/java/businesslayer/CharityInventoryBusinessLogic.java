@@ -37,6 +37,8 @@ public class CharityInventoryBusinessLogic {
     public boolean isFoodNameAndRetailerExists(String foodName, String retailer){
         return charityInventoryDao.isFoodNameAndRetailerExists(foodName, retailer);
     }
-
+    public boolean isCharityFoodNameAndRetailerExists(String foodName, int charityId){
+      return charityInventoryDao.isCharityFoodNameAndRetailerExists(foodName, charityId);
+    }
     
 }
