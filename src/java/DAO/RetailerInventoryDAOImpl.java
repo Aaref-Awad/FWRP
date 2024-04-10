@@ -258,6 +258,5 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         }
         return exists;
     }
-
 }
 
