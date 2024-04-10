@@ -12,15 +12,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import businesslayer.FavoriteInventoryBusinessLogic;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
+ * Servlet implementation class UpdateFavoriteServlet
  *
+ * This servlet handles the update of favorite items in the inventory.
+ * It allows users to add or remove items from their favorites list.
+ * The servlet retrieves the inventoryId and userId from request parameters,
+ * then checks if the favorite already exists for the given inventoryId and userId.
+ * If the checkbox is checked, the servlet adds the favorite; otherwise, it deletes the favorite.
+ * Finally, it redirects the user back to the same page.
+ * 
  * @author Aaref
  */
 public class UpdateFavoriteServlet extends HttpServlet {
@@ -38,7 +40,7 @@ public class UpdateFavoriteServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            /* TODO output your page here. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -51,7 +53,6 @@ public class UpdateFavoriteServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -117,7 +118,7 @@ public class UpdateFavoriteServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet for updating favorite items in the inventory";
     }// </editor-fold>
 
 }

@@ -17,7 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Servlet implementation class AddFoodItemServlet
  *
+ * This servlet handles the addition of food items by retailers.
+ * It receives POST requests from a form in the retailer's page and adds the food item to the inventory.
+ * 
  * @author Aaref
  */
 public class AddFoodItemServlet extends HttpServlet {
@@ -48,7 +52,6 @@ public class AddFoodItemServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -108,7 +111,7 @@ public class AddFoodItemServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet for adding food items by retailers";
     }// </editor-fold>
 
 }

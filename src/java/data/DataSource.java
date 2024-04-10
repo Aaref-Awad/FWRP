@@ -14,7 +14,11 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- *
+ * The DataSource class provides methods to establish a connection to the database.
+ * It implements the Singleton pattern to ensure only one instance of the connection is created.
+ * 
+ * This class uses JDBC to connect to the MySQL database.
+ * 
  * @author Owner
  */
 public class DataSource {
@@ -22,8 +26,13 @@ public class DataSource {
     private static Connection connection = null;
     private String driverString = "com.mysql.cj.jdbc.Driver";
     private static DataSource instance;
+    
+    /**
+     * Private constructor to prevent external instantiation.
+     * Initializes the database connection.
+     */
     private DataSource() {
-        try{
+        try {
             Class.forName(this.driverString);
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fwrp", "root", "TNT2004x@");
         } catch (SQLException e) {
@@ -34,20 +43,25 @@ public class DataSource {
             throw new RuntimeException("Driver class not found", e);
         }
     }
-    // Method to get the singleton instance of DBConnection
+    
+    /**
+     * Returns the singleton instance of the DataSource.
+     * 
+     * @return the DataSource instance
+     */
     public static DataSource getInstance() {
         if (instance == null) {
-
             instance = new DataSource();
         }
         return instance;
     }
 
-        // Method to get the database connection
+    /**
+     * Retrieves the database connection.
+     * 
+     * @return the database connection
+     */
     public Connection getConnection() {
-    
         return connection;
     }
-    
 }
-

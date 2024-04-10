@@ -22,19 +22,31 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Servlet implementation class ClaimDonationServlet
  *
+ * This servlet handles the claiming of donations by charity organizations.
+ * It receives POST requests from the charity organization page and updates the inventory accordingly.
+ * 
  * @author Luke
  */
 @WebServlet(name = "ClaimDonationServlet", urlPatterns = {"/ClaimDonationServlet"})
 public class ClaimDonationServlet extends HttpServlet {
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
         
         try{
-            // Create a RetailerInventoryDTO object with updated information
+            // Create a CharityInventoryDTO object with updated information
             CharityInventoryDTO updatedInventory = new CharityInventoryDTO();
             if (userId != null) {
                 updatedInventory.setCharityID(userId);
@@ -57,16 +69,14 @@ public class ClaimDonationServlet extends HttpServlet {
     }
 
 
-        @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
-
-
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet for claiming donations by charity organizations";
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

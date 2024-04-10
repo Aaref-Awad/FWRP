@@ -8,7 +8,6 @@ import data.DataSource;
 import DTO.UserDTO;
 import businesslayer.UserBusinessLogic;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -22,7 +21,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Servlet implementation class RegistrationServlet
  *
+ * This servlet handles user registration requests. It adds a new user to the database
+ * and redirects the user to the appropriate page based on their user type.
+ * If an error occurs during the registration process, it prints the stack trace.
+ * 
  * @author Aaref
  */
 public class RegistrationServlet extends HttpServlet {
@@ -40,7 +44,7 @@ public class RegistrationServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            /* TODO output your page here. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -53,7 +57,6 @@ public class RegistrationServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -112,7 +115,6 @@ public class RegistrationServlet extends HttpServlet {
             }
     }
 
-
     /**
      * Returns a short description of the servlet.
      *
@@ -120,7 +122,7 @@ public class RegistrationServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet for handling user registration requests";
     }// </editor-fold>
 
 }

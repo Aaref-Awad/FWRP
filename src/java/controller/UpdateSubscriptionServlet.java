@@ -8,15 +8,19 @@ import businesslayer.UserBusinessLogic;
 import DTO.UserDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet implementation class UpdateSubscriptionServlet
+ * 
+ * This servlet handles the updating of user subscription status.
+ * It retrieves the user ID and subscription status from the request parameters,
+ * then updates the subscription status in the database accordingly.
+ * The servlet redirects the user back to the previous page after updating the subscription status.
+ * 
  * @author Aaref
  */
 public class UpdateSubscriptionServlet extends HttpServlet {
@@ -34,7 +38,7 @@ public class UpdateSubscriptionServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            /* TODO output your page here. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -47,7 +51,6 @@ public class UpdateSubscriptionServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -99,7 +102,7 @@ public class UpdateSubscriptionServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet for updating user subscription status";
     }// </editor-fold>
 
 }

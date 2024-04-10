@@ -4,22 +4,23 @@
  */
 package controller;
 
-
 import DTO.UserDTO;
 import businesslayer.UserBusinessLogic;
-import com.mysql.cj.log.Log;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 /**
- *
+ * Servlet implementation class LoginServlet
+ * 
+ * This servlet handles user login requests. It authenticates the user credentials
+ * and redirects the user to the appropriate page based on their user type.
+ * If the user credentials are invalid, it displays an error message.
+ * 
  * @author Aaref
  */
 public class LoginServlet extends HttpServlet {
@@ -37,7 +38,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            /* TODO output your page here. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -50,7 +51,6 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -106,7 +106,6 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-
     /**
      * Returns a short description of the servlet.
      *
@@ -114,7 +113,7 @@ public class LoginServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "Servlet for handling user login requests";
+    }
 
 }

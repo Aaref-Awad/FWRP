@@ -4,8 +4,6 @@
  */
 package controller;
 
-//import DTO.InventoryDTO;
-//import businesslayer.InventoryBusinessLogic;
 import DTO.RetailerInventoryDTO;
 import businesslayer.RetailerInventoryBusinessLogic;
 import businesslayer.UserBusinessLogic;
@@ -19,9 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 /**
- *
+ * Servlet implementation class UpdateInventorServlet
+ * 
+ * This servlet handles the update of inventory items by retailers.
+ * It retrieves the inventory details based on the inventory ID, 
+ * then updates the inventory in the database with the values submitted by the retailer.
+ * The servlet redirects the user back to the RetailerPage after updating the inventory.
+ * 
  * @author Aaref
  */
 public class UpdateInventorServlet extends HttpServlet {
@@ -39,7 +42,7 @@ public class UpdateInventorServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            /* TODO output your page here. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -52,33 +55,6 @@ public class UpdateInventorServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        InventoryBusinessLogic inventoryBusinessLogic = new InventoryBusinessLogic();
-//        List<InventoryDTO> foodItems = null;
-//
-//        try {
-//            foodItems = inventoryBusinessLogic.getAllFoodItems();
-//        } catch (SQLException ex) {
-//            log(ex.getMessage());
-//        }
-//
-//        request.setAttribute("fooditems", foodItems);
-//
-//        RequestDispatcher dispatcher = request.getRequestDispatcher("views/RetailerPage.jsp");
-//        dispatcher.forward(request, response);
-//    }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -87,9 +63,6 @@ public class UpdateInventorServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-
-
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -149,10 +122,6 @@ public class UpdateInventorServlet extends HttpServlet {
 
     }
 
-    
-
-   
-
     /**
      * Returns a short description of the servlet.
      *
@@ -160,7 +129,7 @@ public class UpdateInventorServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Servlet for updating inventory items by retailers";
     }// </editor-fold>
 
 }

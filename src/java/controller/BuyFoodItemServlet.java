@@ -19,7 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Servlet implementation class BuyFoodItemServlet
  *
+ * This servlet handles the process of buying food items by consumers.
+ * It receives POST requests from the consumer page and updates the inventory accordingly.
+ * 
  * @author Aaref
  */
 @WebServlet(name = "BuyFoodItemServlet", urlPatterns = {"/BuyFoodItemServlet"})
@@ -51,7 +55,6 @@ public class BuyFoodItemServlet extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -110,7 +113,7 @@ public class BuyFoodItemServlet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return "Servlet for buying food items by consumers";
+    }
 
 }
