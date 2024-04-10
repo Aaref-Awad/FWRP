@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.sql.Timestamp; 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Implementation of RetailerInventoryDAO providing methods to interact with retailer inventory data in the database.
@@ -305,4 +309,22 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         }
         return exists;
     }
+    
+    @Override
+    public boolean isSurPlus(RetailerInventoryDTO inventory) {
+        // Convert the expiration date to LocalDate
+        LocalDate currentDate = LocalDate.now();
+        LocalDate expirationDate = 
+            Instant.ofEpochMilli(inventory.getExpirationDate().getTime())
+                   .atZone(ZoneId.systemDefault())
+                   .toLocalDate();
+
+        // Calculate the difference in days between the current date and the expiration date
+        long daysUntilExpiration = ChronoUnit.DAYS.between(currentDate, expirationDate);
+
+        // Check if the item is near expiration date by 1 week or if the amount is over 50
+        return daysUntilExpiration <= 7 || inventory.getFoodAmount() > 50;
+    }
+
+
 }

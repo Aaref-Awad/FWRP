@@ -54,7 +54,7 @@ public class RetailerInventoryBusinessLogic {
      */
     public void addInventory(RetailerInventoryDTO inventory) {
         retailerInventoryDao.insertInventory(inventory);
-    } 
+    }
     
     /**
      * Updates an existing retailer inventory.
@@ -106,6 +106,7 @@ public class RetailerInventoryBusinessLogic {
         return retailerInventoryDao.isFoodNameAndRetailerExists(foodName, retailer);
     }
     
+
     /**
      * Deletes a retailer inventory.
      *
@@ -113,6 +114,10 @@ public class RetailerInventoryBusinessLogic {
      */
     public void deleteInventory(RetailerInventoryDTO inventory) {
         retailerInventoryDao.deleteInventory(inventory);
-    }
 
+    }
+        public boolean isSurPlus(RetailerInventoryDTO inventory){
+        return retailerInventoryDao.isSurPlus(inventory);
+
+    }
 }

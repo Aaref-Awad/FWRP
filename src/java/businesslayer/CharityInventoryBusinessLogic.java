@@ -4,6 +4,11 @@ import DAO.CharityInventoryDAOImpl;
 import DTO.CharityInventoryDTO;
 import java.util.List;
 
+import DTO.RetailerInventoryDTO;
+import java.util.Date;
+
+import java.util.List;
+
 /**
  * Business logic layer for Charity Inventory operations.
  */
@@ -45,14 +50,21 @@ public class CharityInventoryBusinessLogic {
         charityInventoryDao.insertInventory(inventory);
     }
     
+
     /**
      * Updates an existing inventory in the charity inventory.
      *
      * @param inventory the CharityInventoryDTO representing the inventory to update
      */
+
+    public void addRetailerInventory(RetailerInventoryDTO inventory) {
+        charityInventoryDao.insertRetailerInventory(inventory);
+    }
+
     public void updateInventory(CharityInventoryDTO inventory){
         charityInventoryDao.updateInventory(inventory);
     }
+
     
     /**
      * Deletes an existing inventory in the charity inventory.
@@ -62,4 +74,14 @@ public class CharityInventoryBusinessLogic {
     public void deleteInventory(CharityInventoryDTO inventory){
         charityInventoryDao.deleteInventory(inventory);
     }
+
+    public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate) {
+       return charityInventoryDao.getNewlyAddedItems(userId, lastLoginDate);
+    }
+    public boolean isFoodNameAndRetailerExists(String foodName, String retailer){
+        return charityInventoryDao.isFoodNameAndRetailerExists(foodName, retailer);
+    }
+
+    
+
 }
