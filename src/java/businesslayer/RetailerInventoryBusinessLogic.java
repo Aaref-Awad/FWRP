@@ -95,8 +95,24 @@ public class RetailerInventoryBusinessLogic {
         retailerInventoryDao.updateInventoryFoodAmount(inventory);
     }
     
+    /**
+     * Checks if a food name and retailer already exist in retailer inventories.
+     *
+     * @param foodName the name of the food to check
+     * @param retailer the name of the retailer to check
+     * @return true if the food name and retailer already exist, otherwise false
+     */
     public boolean isFoodNameAndRetailerExists(String foodName, String retailer){
         return retailerInventoryDao.isFoodNameAndRetailerExists(foodName, retailer);
+    }
+    
+    /**
+     * Deletes a retailer inventory.
+     *
+     * @param inventory the RetailerInventoryDTO representing the retailer inventory to delete
+     */
+    public void deleteInventory(RetailerInventoryDTO inventory) {
+        retailerInventoryDao.deleteInventory(inventory);
     }
 
 }
