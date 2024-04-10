@@ -13,9 +13,16 @@
     </head>
     <body>
         <header>
-            
+            <%@ include file="../header.jsp" %>
         </header>
         <main>
+            
+            <% 
+                if (session.getAttribute("userId") == null) {
+                response.sendRedirect("../LoginPage.jsp");
+                }
+            %>
+            
             <div>
                 <form action="../AddFoodItemServlet" method="post">
                     <h1>Add Food Item</h1>

@@ -4,18 +4,15 @@
  */
 package controller;
 
-import data.DataSource;
+import DTO.RetailerInventoryDTO;
 import DTO.UserDTO;
+import businesslayer.RetailerInventoryBusinessLogic;
 import businesslayer.UserBusinessLogic;
-
-
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
+import java.sql.Date;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,7 +22,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Aaref
  */
-public class RegistrationServlet extends HttpServlet {
+@WebServlet(name = "BuyFoodItemServlet", urlPatterns = {"/BuyFoodItemServlet"})
+public class BuyFoodItemServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +42,10 @@ public class RegistrationServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegistrationServlet</title>");            
+            out.println("<title>Servlet BuyFoodItemServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegistrationServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet BuyFoodItemServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -79,39 +77,31 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
-        UserDTO user = new UserDTO();
-        HttpSession session = request.getSession(); 
-
-        user.setUsername(request.getParameter("username"));
-        user.setEmail(request.getParameter("email"));
-        user.setPassword(request.getParameter("password"));
-        user.setUserType(request.getParameter("usertype"));
-
-        RequestDispatcher dispatcher = null;
-
+        HttpSession session = request.getSession();
+        Integer userId = (Integer) session.getAttribute("userId");
+        
         try{
-            userBusinessLogic.addUser(user);
-            session.setAttribute("userId", userBusinessLogic.getUserByLogin(user.getUsername(), user.getPassword()).getUserID());
-            session.setAttribute("userName", user.getUsername());
-            session.setAttribute("password", user.getPassword());
-            
-            if (user.getUserType().equalsIgnoreCase("Consumer")){
-                    response.sendRedirect("views/ConsumerPage.jsp");
-                }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
-                     response.sendRedirect("views/CharityOrgPage.jsp");
-                } else {
-                  response.sendRedirect("views/RetailerPage.jsp");
-                }
+            // Create a RetailerInventoryDTO object with updated information
+            RetailerInventoryDTO updatedInventory = new RetailerInventoryDTO();
+            if (userId != null) {
+                updatedInventory.setUserID(userId);
+            }
 
+            // Update inventory in the database
+            RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
+            updatedInventory = retailerInventoryBusinessLogic.getInventoryById(Integer.parseInt(request.getParameter("inventoryId")));
+            updatedInventory.setFoodAmount(updatedInventory.getFoodAmount()-1);
+            retailerInventoryBusinessLogic.updateInventoryFoodAmount(updatedInventory);
+            // Redirect back to the UpdateInventoryPage or any other appropriate page
+             
+
+            response.sendRedirect("views/ConsumerPage.jsp");
         }catch(Exception e){
             e.printStackTrace();
+        }finally{
 
-        } finally{
-
-            }
+        }
     }
-
 
     /**
      * Returns a short description of the servlet.

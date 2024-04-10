@@ -13,14 +13,43 @@
         <servlet-class>controller.LoginServlet</servlet-class>
     </servlet>
     <servlet>
-    <servlet-name>ClaimDonationServlet</servlet-name>
-    <servlet-class>controller.ClaimDonationServlet</servlet-class>
+        <servlet-name>ClaimDonationServlet</servlet-name>
+        <servlet-class>controller.ClaimDonationServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddFoodItemServlet</servlet-name>
         <servlet-class>controller.AddFoodItemServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateInventorServlet</servlet-name>
+        <servlet-class>controller.UpdateInventorServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BuyFoodItemServlet</servlet-name>
+        <servlet-class>controller.BuyFoodItemServlet</servlet-class>
+    </servlet>
 
+
+    <servlet>
+        <servlet-name>GetNewlyAddedItemsServlet</servlet-name>
+        <servlet-class>controller.GetNewlyAddedItemsServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSubscriptionServlet</servlet-name>
+        <servlet-class>controller.UpdateSubscriptionServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateFavoriteServlet</servlet-name>
+        <servlet-class>controller.UpdateFavoriteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>controller.LogoutServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCharityFavoriteServlet</servlet-name>
+        <servlet-class>controller.UpdateCharityFavoriteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FWRPServlet</servlet-name>
         <url-pattern>/FWRPServlet</url-pattern>
@@ -34,15 +63,45 @@
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-    <servlet-name>ClaimDonationServlet</servlet-name>
-    <url-pattern>/claimDonation</url-pattern>
+        <servlet-name>ClaimDonationServlet</servlet-name>
+        <url-pattern>/ClaimDonationServlet</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>AddFoodItemServlet</servlet-name>
         <url-pattern>/AddFoodItemServlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>UpdateInventorServlet</servlet-name>
+        <url-pattern>/UpdateInventorServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BuyFoodItemServlet</servlet-name>
+        <url-pattern>/BuyFoodItemServlet</url-pattern>
+    </servlet-mapping>B
 
+    
+    <servlet-mapping>
+        <servlet-name>GetNewlyAddedItemsServlet</servlet-name>
+        <url-pattern>/GetNewlyAddedItemsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSubscriptionServlet</servlet-name>
+        <url-pattern>/UpdateSubscriptionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateFavoriteServlet</servlet-name>
+        <url-pattern>/UpdateFavoriteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCharityFavoriteServlet</servlet-name>
+        <url-pattern>/UpdateCharityFavoriteServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

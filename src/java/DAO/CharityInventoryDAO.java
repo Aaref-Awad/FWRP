@@ -1,11 +1,12 @@
 package DAO;
 
 import DTO.CharityInventoryDTO;
+import DTO.RetailerInventoryDTO;
+import java.util.Date;
 import java.util.List;
 
 /**
- *
- * @author Aaref
+ * DAO Interface for Charity Inventory
  */
 public interface CharityInventoryDAO {
     // CRUD operations
@@ -15,4 +16,7 @@ public interface CharityInventoryDAO {
     public void insertInventory(CharityInventoryDTO inventory);
     public void updateInventory(CharityInventoryDTO inventory);
     public void deleteInventory(CharityInventoryDTO inventory);
+    public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate);
+    public boolean isFoodNameAndRetailerExists(String foodName, String retailer);
+    public boolean isCharityFoodNameAndRetailerExists(String foodName, int charityId);
 }

@@ -4,28 +4,20 @@
  */
 package controller;
 
-import data.DataSource;
-import DTO.UserDTO;
-import businesslayer.UserBusinessLogic;
-
-
+import DTO.FavoriteInventoryDTO;
+import businesslayer.FavoriteInventoryBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Aaref
  */
-public class RegistrationServlet extends HttpServlet {
+public class UpdateCharityFavoriteServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +36,10 @@ public class RegistrationServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet RegistrationServlet</title>");            
+            out.println("<title>Servlet UpdateCharityFavoriteServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet RegistrationServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateCharityFavoriteServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -79,39 +71,38 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
-        UserDTO user = new UserDTO();
-        HttpSession session = request.getSession(); 
+                // Retrieve inventoryId and userId from request parameters
+        int inventoryId = Integer.parseInt(request.getParameter("inventoryId"));
+        int userId = (Integer) request.getSession().getAttribute("userId");
 
-        user.setUsername(request.getParameter("username"));
-        user.setEmail(request.getParameter("email"));
-        user.setPassword(request.getParameter("password"));
-        user.setUserType(request.getParameter("usertype"));
+        // Initialize FavoriteInventoryBusinessLogic object
+        FavoriteInventoryBusinessLogic favoriteLogic = new FavoriteInventoryBusinessLogic();
+        int favoriteId = favoriteLogic.getFavoriteIdByInventoryIdAndUserId(inventoryId, userId);
 
-        RequestDispatcher dispatcher = null;
+        // Check if the favorite already exists for the given inventoryId and userId
+        boolean isFavorite = favoriteLogic.isFavorite(inventoryId, userId);
 
-        try{
-            userBusinessLogic.addUser(user);
-            session.setAttribute("userId", userBusinessLogic.getUserByLogin(user.getUsername(), user.getPassword()).getUserID());
-            session.setAttribute("userName", user.getUsername());
-            session.setAttribute("password", user.getPassword());
-            
-            if (user.getUserType().equalsIgnoreCase("Consumer")){
-                    response.sendRedirect("views/ConsumerPage.jsp");
-                }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
-                     response.sendRedirect("views/CharityOrgPage.jsp");
-                } else {
-                  response.sendRedirect("views/RetailerPage.jsp");
-                }
-
-        }catch(Exception e){
-            e.printStackTrace();
-
-        } finally{
-
+        // If the checkbox is checked, add the favorite; otherwise, delete the favorite
+        if (request.getParameter("favorite") != null) {
+            if (!isFavorite) {
+                // Create FavoriteInventoryDTO object and add the favorite
+                FavoriteInventoryDTO favorite = new FavoriteInventoryDTO();
+                favorite.setUserID(userId);
+                favorite.setInventoryID(inventoryId);
+                favorite.setFoodName(request.getParameter("FoodName")); // Set the food name if needed
+                favorite.setRetailerName(request.getParameter("RetailerName")); // Set the retailer name if needed
+                favoriteLogic.addFavorite(favorite);
             }
-    }
+        } else {
+            if (isFavorite) {
+                // Delete the favorite
+                favoriteLogic.deleteFavorite(favoriteId);
+            }
+        }
 
+        // Redirect back to the same page
+        response.sendRedirect(request.getContextPath() + "/views/CharityOrgPage.jsp");
+    }
 
     /**
      * Returns a short description of the servlet.

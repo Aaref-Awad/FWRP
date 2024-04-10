@@ -86,25 +86,18 @@ public class LoginServlet extends HttpServlet {
             HttpSession session = request.getSession(); 
             session.setAttribute("userId", user.getUserID());
             session.setAttribute("userName", user.getUsername());
-
-            RequestDispatcher rd = null;
+            session.setAttribute("password", user.getPassword());
 
             if (user.getPassword().equals(password)){
                 if (user.getUserType().equalsIgnoreCase("Consumer")){
-                    rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
                     response.sendRedirect("views/ConsumerPage.jsp");
                 }else if(user.getUserType().equalsIgnoreCase("Charitable Organization")){
-                     rd = request.getRequestDispatcher("views/ConsumerPage.jsp");
-                     response.sendRedirect("views/ConsumerPage.jsp");
-                } else {
-                  rd = request.getRequestDispatcher("views/RetailerPage.jsp");
+                     response.sendRedirect("views/CharityOrgPage.jsp");
+                } else if(user.getUserType().equalsIgnoreCase("Retailer")) {
                   response.sendRedirect("views/RetailerPage.jsp");
                 }
             }
 
-            if (rd != null) {
-                rd.forward(request, response);
-            }
 
         }catch(Exception e){
             e.printStackTrace();

@@ -2,6 +2,8 @@ package businesslayer;
 
 import DAO.CharityInventoryDAOImpl;
 import DTO.CharityInventoryDTO;
+import DTO.RetailerInventoryDTO;
+import java.util.Date;
 import java.util.List;
 
 public class CharityInventoryBusinessLogic {
@@ -21,5 +23,22 @@ public class CharityInventoryBusinessLogic {
 
     public void addInventory(CharityInventoryDTO inventory) {
         charityInventoryDao.insertInventory(inventory);
-    } 
+    }
+    
+    public void addRetailerInventory(RetailerInventoryDTO inventory) {
+        charityInventoryDao.insertRetailerInventory(inventory);
+    }
+    public void updateInventory(CharityInventoryDTO inventory){
+        charityInventoryDao.updateInventory(inventory);
+    }
+    public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate) {
+       return charityInventoryDao.getNewlyAddedItems(userId, lastLoginDate);
+    }
+    public boolean isFoodNameAndRetailerExists(String foodName, String retailer){
+        return charityInventoryDao.isFoodNameAndRetailerExists(foodName, retailer);
+    }
+    public boolean isCharityFoodNameAndRetailerExists(String foodName, int charityId){
+      return charityInventoryDao.isCharityFoodNameAndRetailerExists(foodName, charityId);
+    }
+    
 }

@@ -4,70 +4,79 @@ import java.util.Date;
 
 /**
  *
- * @author Aaref
+ * DTO for Retailer Inventory
  */
 public class RetailerInventoryDTO {
-    private Integer InventoryID;
-    private Integer UserID;
-    private String FoodName;
-    private Integer FoodAmount;
-    private Double Price;
-    private Date ExpirationDate;
-    private String SurplusType;
+    private Integer inventoryID;
+    private Integer userID;
+    private String foodName;
+    private Integer foodAmount;
+    private Double price;
+    private Date expirationDate;
+    private String surplusType;
+    private Date itemAdded; // Added attribute
 
     public Integer getInventoryID() {
-        return InventoryID;
+        return inventoryID;
     }
 
-    public void setInventoryID(Integer InventoryID) {
-        this.InventoryID = InventoryID;
+    public void setInventoryID(Integer inventoryID) {
+        this.inventoryID = inventoryID;
     }
 
     public Integer getUserID() {
-        return UserID;
+        return userID;
     }
 
-    public void setUserID(Integer UserID) {
-        this.UserID = UserID;
+    public void setUserID(Integer userID) {
+        this.userID = userID;
+    }
+
+    public String getFoodName() {
+        return foodName;
+    }
+
+    public void setFoodName(String foodName) {
+        this.foodName = foodName;
     }
 
     public Integer getFoodAmount() {
-        return FoodAmount;
+        return foodAmount;
     }
 
-    public void setFoodAmount(Integer FoodAmount) {
-        this.FoodAmount = FoodAmount;
+    public void setFoodAmount(Integer foodAmount) {
+        this.foodAmount = foodAmount;
     }
 
     public Double getPrice() {
-        return Price;
+        return price;
     }
 
-    public void setPrice(Double Price) {
-        this.Price = Price;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Date getExpirationDate() {
-        return ExpirationDate;
+        return expirationDate;
     }
 
-    public void setExpirationDate(Date ExpirationDate) {
-        this.ExpirationDate = ExpirationDate;
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     public String getSurplusType() {
-        return SurplusType;
+        return surplusType;
     }
 
-    public void setSurplusType(String SurplusType) {
-        this.SurplusType = SurplusType;
+    public void setSurplusType(String surplusType) {
+        this.surplusType = surplusType;
     }
     
-        public String getFoodName() { // Getter for FoodName
-        return FoodName;
+    public Date getItemAdded() {
+        return itemAdded;
     }
 
-    public void setFoodName(String FoodName) { // Setter for FoodName
-        this.FoodName = FoodName;
+    public void setItemAdded(Date itemAdded) {
+        this.itemAdded = itemAdded;
     }
 }
