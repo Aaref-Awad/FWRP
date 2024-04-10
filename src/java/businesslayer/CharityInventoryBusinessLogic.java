@@ -24,6 +24,10 @@ public class CharityInventoryBusinessLogic {
     public void addInventory(CharityInventoryDTO inventory) {
         charityInventoryDao.insertInventory(inventory);
     }
+    
+    public void addRetailerInventory(RetailerInventoryDTO inventory) {
+        charityInventoryDao.insertRetailerInventory(inventory);
+    }
     public void updateInventory(CharityInventoryDTO inventory){
         charityInventoryDao.updateInventory(inventory);
     }

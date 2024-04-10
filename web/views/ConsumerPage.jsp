@@ -1,3 +1,4 @@
+<%@page import="businesslayer.CharityInventoryBusinessLogic"%>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="businesslayer.FavoriteInventoryBusinessLogic" %>
 <%@ page import="DTO.FavoriteInventoryDTO" %>
@@ -117,6 +118,11 @@
                 FavoriteInventoryBusinessLogic favoriteInventoryBusinessLogic = new FavoriteInventoryBusinessLogic();
         %>
         <tr>
+            <% if (inventory.getSurplusType().equals("Sale") && retailerInventoryBusinessLogic.isSurPlus(inventory) ){ 
+                CharityInventoryBusinessLogic charityInventoryBusinessLogic = new CharityInventoryBusinessLogic();
+                charityInventoryBusinessLogic.addRetailerInventory(inventory);
+            
+            }%>else{%>
             <td><%= inventory.getFoodName() %></td>
             <td><%= inventory.getFoodAmount() %></td>
             <td><%= inventory.getExpirationDate() %></td>
@@ -151,7 +157,7 @@
             </td>
         </tr>
         <%
-            }
+         }
         %>
     </table>
 

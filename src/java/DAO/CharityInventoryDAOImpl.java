@@ -220,4 +220,20 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         }
         return exists;
     }
+
+    public void insertRetailerInventory(RetailerInventoryDTO inventory) {
+                try {
+            pstmt = con.prepareStatement(
+                    "INSERT INTO CharityInventory (CharityID, Quantity, FoodName, ExpirationDate, ItemAdded) "
+                            + "VALUES(?, ?, ?, ?, ?)");
+            pstmt.setInt(1, inventory.getUserID());
+            pstmt.setInt(2, inventory.getFoodAmount());
+            pstmt.setString(3, inventory.getFoodName());
+            pstmt.setDate(4, new java.sql.Date(inventory.getExpirationDate().getTime()));
+            pstmt.setTimestamp(5, new java.sql.Timestamp(System.currentTimeMillis())); // Use current timestamp for itemAdded
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
