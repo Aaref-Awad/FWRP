@@ -20,6 +20,8 @@ public class UserBusinessLogic {
     public UserBusinessLogic() {
         usersDao = new UserDAOImpl();
     }
+    
+    
 
     public List<UserDTO> getAllUsers() throws SQLException {
         return usersDao.getAllUsers();
