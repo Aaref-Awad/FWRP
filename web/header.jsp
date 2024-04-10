@@ -23,12 +23,12 @@
     </style>
 </head>
 <body>
-<header class="header-bar">
+<header class="header-bar" onload="window.location.href='../LogoutServlet'">
     <div>
         User Name: <%= session.getAttribute("userName") != null ? session.getAttribute("userName").toString() : "" %>
         <input type="hidden" name="UserId" value=<%= session.getAttribute("userId")%>>
     </div>
-    <div><a href="../LoginPage.jsp">Logout</a></div>
+    <div><a href="../LogoutServlet">Logout</a></div>
 </header>
 <main>
     <!-- This is where the content of the page will be included -->

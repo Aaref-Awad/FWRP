@@ -19,4 +19,5 @@ public interface RetailerInventoryDAO {
     public boolean isFoodNameAlreadyExists(String foodName);
     public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate);
     public void updateInventoryFoodAmount(RetailerInventoryDTO inventory);
+    public boolean isFoodNameAndRetailerExists(String foodName, String retailer);
 }

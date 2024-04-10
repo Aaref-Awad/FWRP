@@ -57,9 +57,6 @@
         <div id="popupContent">
             <%
                 // Check if UserId is null in the session, if yes, redirect to LoginPage.jsp
-                if (session.getAttribute("userId") == null) {
-                    response.sendRedirect("../LoginPage.jsp");
-                } else {
                     Integer userId = (Integer) session.getAttribute("userId");
                     String username = (String) session.getAttribute("userName");
                     String password = (String) session.getAttribute("password");
@@ -81,34 +78,25 @@
                     } else {
                         for (RetailerInventoryDTO item : items) { %>
                             <div>
+                                <% 
+                                    UserDTO user2 = userBusinessLogic.getUserById(item.getUserID());
+                                    if (retailerInventoryBusinessLogic.isFoodNameAndRetailerExists(item.getFoodName(), user2.getUsername() )){
+                                %>
                                 <p>Food Name: <%= item.getFoodName() %></p>
                                 <p>Food Amount: <%= item.getFoodAmount() %></p>
                                 <p>Expiration Date: <%= item.getExpirationDate() %></p>
                                 <p>Price: <%= item.getPrice() %></p>
+                                <% } %>
                             </div>
                             <%
                         }
                     }
                     userBusinessLogic.updateUserLastLogin(userId, new Date());
-                }
             %>
         </div>
     </div>
 
     <%
-        // Check if UserId is null in the session, if yes, redirect to LoginPage.jsp
-        if (session.getAttribute("userId") == null) {
-            response.sendRedirect("../LoginPage.jsp");
-        } else {
-            Integer userId = (Integer) session.getAttribute("userId");
-            String username = (String) session.getAttribute("userName");
-            String password = (String) session.getAttribute("password");
-            UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
-            UserDTO user = userBusinessLogic.getUserByLogin(username, password);
-
-            // Fetch newly added items from servle
-            RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
-
             // Retrieve inventories related to the current user
             List<RetailerInventoryDTO> inventories = retailerInventoryBusinessLogic.getAllInventories();
             UserDTO currentUser = userBusinessLogic.getUserById((Integer) session.getAttribute("userId"));
@@ -160,7 +148,6 @@
         </tr>
         <%
             }
-        }
         %>
     </table>
 
@@ -170,11 +157,6 @@
             if (session.getAttribute("userId") == null) {
             response.sendRedirect("../LoginPage.jsp");
         } else {
-            Integer userId = (Integer) session.getAttribute("userId");
-            String username = (String) session.getAttribute("userName");
-            String password = (String) session.getAttribute("password");
-            UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
-            UserDTO user = userBusinessLogic.getUserByLogin(username, password);
             if (user.isSubed()) { %>
                 <input type='hidden' name='userId' value='<%= userId %>' />
                 <input type='hidden' name='isSubscribed' value='false' />
@@ -209,7 +191,7 @@
     if (closePopup != null && closePopup.equals("true")) {
         %>
         <script>
-            document.getElementById('popup').style.display = 'none';
+            document.getElementById('popup').style.di splay = 'none';
         </script>
         <%
     } %>

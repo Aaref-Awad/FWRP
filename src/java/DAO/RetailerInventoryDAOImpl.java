@@ -200,6 +200,7 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
            try {
                // SQL query to select items added after the last login date
                String query = "SELECT * FROM RetailerInventory WHERE ItemAdded > ?";
+
                pstmt = con.prepareStatement(query);
                pstmt.setTimestamp(1, new Timestamp(lastLoginDate.getTime()));
                rs = pstmt.executeQuery();
@@ -239,5 +240,24 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
 
            return newlyAddedItems;
        }
+    
+    @Override
+    public boolean isFoodNameAndRetailerExists(String foodName, String retailer){
+        boolean exists = false;
+        try {
+            pstmt = con.prepareStatement("SELECT COUNT(*) FROM FavoriteInventory WHERE FoodName = ? OR RetailerName = ?");
+            pstmt.setString(1, foodName);
+            pstmt.setString(2, retailer);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                exists = count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+
 }
 

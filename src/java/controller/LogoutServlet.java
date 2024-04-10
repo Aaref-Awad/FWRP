@@ -56,12 +56,9 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(); // Get the current session without creating a new one
-        if (session != null) {
-            session.invalidate(); // Invalidate the session
-        }
-//        response.sendRedirect("LoginPage.jsp");
+        
     }
+
 
     /**
      * Handles the HTTP <code>POST</code> method.
