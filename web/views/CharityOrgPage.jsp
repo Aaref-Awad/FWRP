@@ -135,7 +135,7 @@
             </td>
             <!-- Checkbox for favorite -->
             <td>
-                <form action='../UpdateFavoriteServlet' method='post'>
+                <form action='../UpdateCharityFavoriteServlet' method='post'>
                     <input type='hidden' name='inventoryId' value='<%= inventory.getInventoryID() %>' />
                     <input type='hidden' name='FoodName' value='<%= inventory.getFoodName() %>' />
                     <input type='hidden' name='RetailerName' value='<%= user.getUsername() %>' />

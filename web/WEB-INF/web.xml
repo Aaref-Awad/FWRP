@@ -46,6 +46,10 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>controller.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateCharityFavoriteServlet</servlet-name>
+        <servlet-class>controller.UpdateCharityFavoriteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FWRPServlet</servlet-name>
         <url-pattern>/FWRPServlet</url-pattern>
@@ -93,6 +97,10 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCharityFavoriteServlet</servlet-name>
+        <url-pattern>/UpdateCharityFavoriteServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

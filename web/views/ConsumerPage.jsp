@@ -116,13 +116,10 @@
                 user = userBusinessLogic.getUserById(inventory.getUserID());
 
                 FavoriteInventoryBusinessLogic favoriteInventoryBusinessLogic = new FavoriteInventoryBusinessLogic();
+                
+                if (!(inventory.getSurplusType().equals("Charity") && retailerInventoryBusinessLogic.isSurPlus(inventory)) ){
         %>
         <tr>
-            <% if (inventory.getSurplusType().equals("Sale") && retailerInventoryBusinessLogic.isSurPlus(inventory) ){ 
-                CharityInventoryBusinessLogic charityInventoryBusinessLogic = new CharityInventoryBusinessLogic();
-                charityInventoryBusinessLogic.addRetailerInventory(inventory);
-            
-            }%>else{%>
             <td><%= inventory.getFoodName() %></td>
             <td><%= inventory.getFoodAmount() %></td>
             <td><%= inventory.getExpirationDate() %></td>
@@ -157,6 +154,7 @@
             </td>
         </tr>
         <%
+            }
          }
         %>
     </table>
