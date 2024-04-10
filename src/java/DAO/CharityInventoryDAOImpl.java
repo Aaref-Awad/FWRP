@@ -1,13 +1,16 @@
 package DAO;
 
 import DTO.CharityInventoryDTO;
+import DTO.RetailerInventoryDTO;
 import data.DataSource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -148,5 +151,73 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
                 e.printStackTrace();
             }
         }
+    }
+    
+    @Override
+    public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate) {
+        List<RetailerInventoryDTO> newlyAddedItems = new ArrayList<>();
+           PreparedStatement pstmt = null;
+           ResultSet rs = null;
+
+           try {
+               // SQL query to select items added after the last login date
+               String query = "SELECT * FROM CharityInventory WHERE ItemAdded > ?";
+
+               pstmt = con.prepareStatement(query);
+               pstmt.setTimestamp(1, new Timestamp(lastLoginDate.getTime()));
+               rs = pstmt.executeQuery();
+
+               // Iterate through the result set and create RetailerInventoryDTO objects
+               while (rs.next()) {
+                   RetailerInventoryDTO inventory = new RetailerInventoryDTO();
+                   inventory.setInventoryID(rs.getInt("InventoryID"));
+                   inventory.setUserID(rs.getInt("UserID"));
+                   inventory.setFoodAmount(rs.getInt("FoodAmount"));
+                   inventory.setFoodName(rs.getString("FoodName"));
+                   inventory.setPrice(rs.getDouble("Price"));
+                   inventory.setExpirationDate(rs.getDate("ExpirationDate"));
+                   inventory.setSurplusType(rs.getString("SurplusType"));
+                   inventory.setItemAdded(rs.getTimestamp("ItemAdded"));
+                   newlyAddedItems.add(inventory);
+               }
+           } catch (SQLException e) {
+               e.printStackTrace();
+           } finally {
+               // Close PreparedStatement and ResultSet
+               if (rs != null) {
+                   try {
+                       rs.close();
+                   } catch (SQLException e) {
+                       e.printStackTrace();
+                   }
+               }
+               if (pstmt != null) {
+                   try {
+                       pstmt.close();
+                   } catch (SQLException e) {
+                       e.printStackTrace();
+                   }
+               }
+           }
+
+           return newlyAddedItems;
+       }
+    
+    @Override
+    public boolean isFoodNameAndRetailerExists(String foodName, String retailer){
+        boolean exists = false;
+        try {
+            pstmt = con.prepareStatement("SELECT COUNT(*) FROM FavoriteInventory WHERE FoodName = ? OR RetailerName = ?");
+            pstmt.setString(1, foodName);
+            pstmt.setString(2, retailer);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                exists = count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exists;
     }
 }

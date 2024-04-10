@@ -46,5 +46,9 @@ public class RetailerInventoryBusinessLogic {
     public boolean isFoodNameAndRetailerExists(String foodName, String retailer){
         return retailerInventoryDao.isFoodNameAndRetailerExists(foodName, retailer);
     }
+    
+    public boolean isSurPlus(RetailerInventoryDTO inventory){
+        return retailerInventoryDao.isSurPlus(inventory);
+    }
 
 }
