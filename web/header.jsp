@@ -23,12 +23,6 @@
     </style>
 </head>
 <body>
-<header class="header-bar" onload="window.location.href='../LogoutServlet'">
-    <div>
-        User Name: <%= session.getAttribute("userName") != null ? session.getAttribute("userName").toString() : "" %>
-        <input type="hidden" name="UserId" value=<%= session.getAttribute("userId")%>>
-    </div>
-    <div><a href="../LogoutServlet">Logout</a></div>
 <header class="header-bar">
     <div>
         User Name: <%= session.getAttribute("userName") != null ? session.getAttribute("userName").toString() : "" %>
