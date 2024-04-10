@@ -23,6 +23,8 @@ public class UserBusinessLogic {
         usersDao = new UserDAOImpl();
     }
     
+    public UserDTO validateUser
+    
     /**
      * Retrieves all users.
      *
