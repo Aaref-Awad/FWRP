@@ -6,12 +6,12 @@ import java.util.Date;
  * Data Transfer Object (DTO) representing Charity Inventory.
  */
 public class CharityInventoryDTO {
-    private Integer inventoryID;
-    private Integer charityID;
-    private Integer quantity;
-    private String foodName;
-    private Date expirationDate;
-    private Date itemAdded; // Added attribute
+    private Integer inventoryID; // The inventory ID
+    private Integer charityID; // The charity ID
+    private Integer quantity; // The quantity
+    private String foodName; // The name of the food
+    private Date expirationDate; // The expiration date
+    private Date itemAdded; // The date when the item was added
 
     /**
      * Retrieves the inventory ID.
@@ -68,7 +68,7 @@ public class CharityInventoryDTO {
     }
 
     /**
-     * Retrieves the food name.
+     * Retrieves the name of the food.
      *
      * @return the food name
      */
@@ -77,7 +77,7 @@ public class CharityInventoryDTO {
     }
 
     /**
-     * Sets the food name.
+     * Sets the name of the food.
      *
      * @param foodName the food name to set
      */
