@@ -34,6 +34,11 @@
     </header>
     
     <main>
+        <% 
+            if (session.getAttribute("userId") == null) {
+                response.sendRedirect("../LoginPage.jsp");
+            }
+        %>
         <h2>Newly Added Items</h2>
         <!-- Hidden popup -->
         <button id="closePopup">Close</button>

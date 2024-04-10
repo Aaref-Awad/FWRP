@@ -94,4 +94,9 @@ public class RetailerInventoryBusinessLogic {
     public void updateInventoryFoodAmount(RetailerInventoryDTO inventory){
         retailerInventoryDao.updateInventoryFoodAmount(inventory);
     }
+    
+    public boolean isFoodNameAndRetailerExists(String foodName, String retailer){
+        return retailerInventoryDao.isFoodNameAndRetailerExists(foodName, retailer);
+    }
+
 }
