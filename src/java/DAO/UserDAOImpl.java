@@ -11,12 +11,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Implementation of UserDAO interface providing methods to interact with user data in the database.
+ */
 public class UserDAOImpl implements UserDAO {
 
     private static Connection con = DataSource.getInstance().getConnection();
     private static PreparedStatement pstmt;
     private static ResultSet rs;
 
+    /**
+     * Retrieves all users from the database.
+     *
+     * @return a list of UserDTO objects representing all users
+     */
     @Override
     public List<UserDTO> getAllUsers() {
         ArrayList<UserDTO> users = null;
@@ -46,6 +54,12 @@ public class UserDAOImpl implements UserDAO {
         return users;
     }
 
+    /**
+     * Retrieves a user from the database by their ID.
+     *
+     * @param userId the ID of the user to retrieve
+     * @return the UserDTO object representing the user with the specified ID
+     */
     @Override
     public UserDTO getUserById(int userId) {
         UserDTO user = null;
@@ -73,6 +87,13 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    /**
+     * Retrieves a user from the database by their username and password.
+     *
+     * @param username the username of the user
+     * @param password the password of the user
+     * @return the UserDTO object representing the user with the specified username and password
+     */
     @Override
     public UserDTO getUserByLogin(String username, String password) {
         UserDTO user = null;
@@ -100,7 +121,11 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
-
+    /**
+     * Inserts a new user into the database.
+     *
+     * @param user the UserDTO object representing the user to be inserted
+     */
     @Override
     public void insertUser(UserDTO user) {
         try {
@@ -120,13 +145,18 @@ public class UserDAOImpl implements UserDAO {
                 pstmt.executeUpdate();
 
             } else {
-                throw new SQLException("User with Username " + user.getUsername()+ " already exists.");
+                throw new SQLException("User with Username " + user.getUsername() + " already exists.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Updates an existing user in the database.
+     *
+     * @param user the UserDTO object representing the user to be updated
+     */
     @Override
     public void updateUser(UserDTO user) {
         try {
@@ -147,6 +177,11 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Deletes a user from the database.
+     *
+     * @param user the UserDTO object representing the user to be deleted
+     */
     @Override
     public void deleteUser(UserDTO user) {
         try {
@@ -159,6 +194,13 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Checks if a user with the specified username already exists in the database.
+     *
+     * @param username the username of the user to check
+     * @return true if the user exists, false otherwise
+     * @throws SQLException if a database access error occurs
+     */
     private boolean userExists(String username) throws SQLException {
         try (PreparedStatement pstmt = con.prepareStatement("SELECT COUNT(*) FROM User WHERE Username = ?")) {
             pstmt.setString(1, username);
@@ -170,7 +212,13 @@ public class UserDAOImpl implements UserDAO {
         }
         return false;
     }
-    
+
+    /**
+     * Updates the last login time of a user in the database.
+     *
+     * @param userId    the ID of the user
+     * @param lastLogin the new last login time
+     */
     @Override
     public void updateUserLastLogin(int userId, Date lastLogin) {
         try {
@@ -182,5 +230,4 @@ public class UserDAOImpl implements UserDAO {
             e.printStackTrace();
         }
     }
-
 }

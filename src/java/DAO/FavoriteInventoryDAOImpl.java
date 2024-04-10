@@ -10,12 +10,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of FavoriteInventoryDAO interface providing methods to interact with favorite inventory data in the database.
+ */
 public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
 
     private static Connection con = DataSource.getInstance().getConnection();
     private static PreparedStatement pstmt;
     private static ResultSet rs;
 
+    /**
+     * Retrieves all favorite inventory entries from the database.
+     *
+     * @return a list of FavoriteInventoryDTO objects representing all favorite inventory entries
+     */
     @Override
     public List<FavoriteInventoryDTO> getAllFavorites() {
         ArrayList<FavoriteInventoryDTO> favorites = null;
@@ -42,6 +50,12 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         return favorites;
     }
 
+    /**
+     * Retrieves a favorite inventory entry from the database by its ID.
+     *
+     * @param favoriteId the ID of the favorite inventory entry to retrieve
+     * @return the FavoriteInventoryDTO object representing the favorite inventory entry with the specified ID
+     */
     @Override
     public FavoriteInventoryDTO getFavoriteById(int favoriteId) {
         FavoriteInventoryDTO favorite = null;
@@ -65,6 +79,12 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         return favorite;
     }
 
+    /**
+     * Retrieves all favorite inventory entries associated with a specific user from the database.
+     *
+     * @param userId the ID of the user
+     * @return a list of FavoriteInventoryDTO objects representing the favorite inventory entries associated with the user
+     */
     @Override
     public List<FavoriteInventoryDTO> getFavoritesByUserId(int userId) {
         ArrayList<FavoriteInventoryDTO> favorites = null;
@@ -89,6 +109,11 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         return favorites;
     }
 
+    /**
+     * Inserts a new favorite inventory entry into the database.
+     *
+     * @param favorite the FavoriteInventoryDTO object representing the favorite inventory entry to be inserted
+     */
     @Override
     public void insertFavorite(FavoriteInventoryDTO favorite) {
         try {
@@ -104,6 +129,11 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         }
     }
 
+    /**
+     * Updates an existing favorite inventory entry in the database.
+     *
+     * @param favorite the FavoriteInventoryDTO object representing the favorite inventory entry to be updated
+     */
     @Override
     public void updateFavorite(FavoriteInventoryDTO favorite) {
         try {
@@ -120,6 +150,11 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         }
     }
 
+    /**
+     * Deletes a favorite inventory entry from the database.
+     *
+     * @param favorite the FavoriteInventoryDTO object representing the favorite inventory entry to be deleted
+     */
     @Override
     public void deleteFavorite(FavoriteInventoryDTO favorite) {
         try {
@@ -132,6 +167,13 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         }
     }
 
+    /**
+     * Checks if a favorite inventory entry already exists in the database.
+     *
+     * @param inventoryId the ID of the inventory
+     * @param userId      the ID of the user
+     * @return true if the favorite inventory entry exists, false otherwise
+     */
     @Override
     public boolean isFavoriteAlreadyExists(int inventoryId, int userId) {
         try {
@@ -150,6 +192,11 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         return false;
     }
 
+    /**
+     * Deletes a favorite inventory entry from the database by its ID.
+     *
+     * @param favoriteId the ID of the favorite inventory entry to be deleted
+     */
     @Override
     public void deleteFavoriteById(int favoriteId) {
         try {
@@ -161,7 +208,14 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
             e.printStackTrace();
         }
     }
-    
+
+    /**
+     * Retrieves the ID of the favorite inventory entry by its associated inventory and user.
+     *
+     * @param inventoryId the ID of the inventory
+     * @param userId      the ID of the user
+     * @return the ID of the favorite inventory entry, or -1 if not found
+     */
     @Override
     public int getFavoriteIdByInventoryIdAndUserId(int inventoryId, int userId) {
         int favoriteId = -1; // Default value if no favorite found
@@ -180,6 +234,5 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         }
         return favoriteId;
     }
-
 
 }

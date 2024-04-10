@@ -19,6 +19,11 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
     private static PreparedStatement pstmt;
     private static ResultSet rs;
 
+    /**
+     * Retrieves all inventories from the database.
+     *
+     * @return a list of CharityInventoryDTO objects representing all inventories
+     */
     @Override
     public List<CharityInventoryDTO> getAllInventories() {
         ArrayList<CharityInventoryDTO> inventories = null;
@@ -45,6 +50,12 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         return inventories;
     }
 
+    /**
+     * Retrieves an inventory from the database by its ID.
+     *
+     * @param inventoryId the ID of the inventory to retrieve
+     * @return the CharityInventoryDTO object representing the inventory with the specified ID
+     */
     @Override
     public CharityInventoryDTO getInventoryById(int inventoryId) {
         CharityInventoryDTO inventory = null;
@@ -69,6 +80,12 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         return inventory;
     }
 
+    /**
+     * Retrieves all inventories associated with a specific charity from the database.
+     *
+     * @param charityId the ID of the charity
+     * @return a list of CharityInventoryDTO objects representing the inventories associated with the charity
+     */
     @Override
     public List<CharityInventoryDTO> getInventoriesByCharityId(int charityId) {
         ArrayList<CharityInventoryDTO> inventories = null;
@@ -94,6 +111,11 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         return inventories;
     }
 
+    /**
+     * Inserts an inventory into the database.
+     *
+     * @param inventory the CharityInventoryDTO object representing the inventory to be inserted
+     */
     @Override
     public void insertInventory(CharityInventoryDTO inventory) {
         try {
@@ -111,6 +133,11 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         }
     }
 
+    /**
+     * Updates an inventory in the database.
+     *
+     * @param inventory the CharityInventoryDTO object representing the inventory to be updated
+     */
     @Override
     public void updateInventory(CharityInventoryDTO inventory) {
         try {
@@ -128,6 +155,11 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         }
     }
 
+    /**
+     * Deletes an inventory from the database.
+     *
+     * @param inventory the CharityInventoryDTO object representing the inventory to be deleted
+     */
     @Override
     public void deleteInventory(CharityInventoryDTO inventory) {
         try {
