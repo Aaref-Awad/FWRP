@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package businesslayer;
 
 import DAO.UserDAOImpl;
@@ -23,7 +19,16 @@ public class UserBusinessLogic {
         usersDao = new UserDAOImpl();
     }
     
-   
+    /**
+     * Validates a user before adding.
+     *
+     * @param user the UserDTO object to validate
+     * @return the validated UserDTO object
+     * @throws ValidationException if validation fails
+     */
+    public UserDTO validateUser(UserDTO user) throws ValidationException {
+        return Validator.validateUser(user);
+    }
     
     /**
      * Retrieves all users.

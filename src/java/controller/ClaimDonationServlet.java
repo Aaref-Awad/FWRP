@@ -56,7 +56,11 @@ public class ClaimDonationServlet extends HttpServlet {
             CharityInventoryBusinessLogic charityInventoryBusinessLogic = new CharityInventoryBusinessLogic();
             updatedInventory = charityInventoryBusinessLogic.getInventoryById(Integer.parseInt(request.getParameter("inventoryId")));
             updatedInventory.setQuantity(updatedInventory.getQuantity()-1);
-            charityInventoryBusinessLogic.updateInventory(updatedInventory);
+            if(updatedInventory.getQuantity() == 0){
+                charityInventoryBusinessLogic.deleteInventory(updatedInventory);
+            }else{
+                charityInventoryBusinessLogic.updateInventory(updatedInventory);
+            }
             // Redirect back to the UpdateInventoryPage or any other appropriate page
              
 

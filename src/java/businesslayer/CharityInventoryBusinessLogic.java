@@ -53,4 +53,13 @@ public class CharityInventoryBusinessLogic {
     public void updateInventory(CharityInventoryDTO inventory){
         charityInventoryDao.updateInventory(inventory);
     }
+    
+    /**
+     * Deletes an existing inventory in the charity inventory.
+     *
+     * @param inventory the CharityInventoryDTO representing the inventory to delete
+     */
+    public void deleteInventory(CharityInventoryDTO inventory){
+        charityInventoryDao.deleteInventory(inventory);
+    }
 }
