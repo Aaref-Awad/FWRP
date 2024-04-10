@@ -116,6 +116,8 @@
                 user = userBusinessLogic.getUserById(inventory.getUserID());
 
                 FavoriteInventoryBusinessLogic favoriteInventoryBusinessLogic = new FavoriteInventoryBusinessLogic();
+                
+                if (!(inventory.getSurplusType().equals("Charity") && retailerInventoryBusinessLogic.isSurPlus(inventory)) ){
         %>
         <tr>
             <% if (inventory.getSurplusType().equals("Sale") && retailerInventoryBusinessLogic.isSurPlus(inventory) ){ 
@@ -157,6 +159,7 @@
             </td>
         </tr>
         <%
+            }
          }
         %>
     </table>

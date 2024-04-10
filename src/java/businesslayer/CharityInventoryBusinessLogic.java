@@ -2,6 +2,8 @@ package businesslayer;
 
 import DAO.CharityInventoryDAOImpl;
 import DTO.CharityInventoryDTO;
+import DTO.RetailerInventoryDTO;
+import java.util.Date;
 import java.util.List;
 
 import DTO.RetailerInventoryDTO;
@@ -50,31 +52,16 @@ public class CharityInventoryBusinessLogic {
         charityInventoryDao.insertInventory(inventory);
     }
     
-
-    /**
-     * Updates an existing inventory in the charity inventory.
-     *
-     * @param inventory the CharityInventoryDTO representing the inventory to update
-     */
-
     public void addRetailerInventory(RetailerInventoryDTO inventory) {
         charityInventoryDao.insertRetailerInventory(inventory);
     }
-
     public void updateInventory(CharityInventoryDTO inventory){
         charityInventoryDao.updateInventory(inventory);
     }
-
     
-    /**
-     * Deletes an existing inventory in the charity inventory.
-     *
-     * @param inventory the CharityInventoryDTO representing the inventory to delete
-     */
     public void deleteInventory(CharityInventoryDTO inventory){
         charityInventoryDao.deleteInventory(inventory);
     }
-
     public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate) {
        return charityInventoryDao.getNewlyAddedItems(userId, lastLoginDate);
     }
@@ -83,5 +70,4 @@ public class CharityInventoryBusinessLogic {
     }
 
     
-
 }

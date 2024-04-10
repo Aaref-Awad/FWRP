@@ -184,7 +184,6 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
             }
         }
     }
-
     
     @Override
     public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate) {
@@ -270,4 +269,3 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         }
     }
 }
-

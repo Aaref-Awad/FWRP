@@ -1,3 +1,4 @@
+<%@page import="businesslayer.CharityInventoryBusinessLogic"%>
 <%@page import="businesslayer.UserBusinessLogic"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="businesslayer.RetailerInventoryBusinessLogic"%>
@@ -34,16 +35,21 @@
             out.println("<table border='1'>");
             out.println("<tr><th>Inventory ID</th><th>Food Name</th><th>Food Amount</th><th>Expiration Date</th><th>Surplus Type</th><th>Price</th><th>Update</th></tr>");
             for (RetailerInventoryDTO inventory : inventories) {
-                out.println("<tr>");
-                out.println("<td>" + inventory.getInventoryID() + "</td>");
-                out.println("<td>" + inventory.getFoodName() + "</td>");
-                out.println("<td>" + inventory.getFoodAmount() + "</td>");
-                out.println("<td>" + inventory.getExpirationDate() + "</td>");
-                out.println("<td>" + inventory.getSurplusType() + "</td>");
-                out.println("<td>" + inventory.getPrice() + "</td>");
-                // Add update button with inventory ID as parameter
-                out.println("<td><button onclick=\"window.location.href='UpdateInventoryPage.jsp?inventoryId=" + inventory.getInventoryID() + "'\">Update</button></td>");
-                out.println("</tr>");
+                if (inventory.getSurplusType().equals("Charity") && retailerInventoryBusinessLogic.isSurPlus(inventory) ){ 
+                CharityInventoryBusinessLogic charityInventoryBusinessLogic = new CharityInventoryBusinessLogic();
+                charityInventoryBusinessLogic.addRetailerInventory(inventory);
+                }else{
+                    out.println("<tr>");
+                    out.println("<td>" + inventory.getInventoryID() + "</td>");
+                    out.println("<td>" + inventory.getFoodName() + "</td>");
+                    out.println("<td>" + inventory.getFoodAmount() + "</td>");
+                    out.println("<td>" + inventory.getExpirationDate() + "</td>");
+                    out.println("<td>" + inventory.getSurplusType() + "</td>");
+                    out.println("<td>" + inventory.getPrice() + "</td>");
+                    // Add update button with inventory ID as parameter
+                    out.println("<td><button onclick=\"window.location.href='UpdateInventoryPage.jsp?inventoryId=" + inventory.getInventoryID() + "'\">Update</button></td>");
+                    out.println("</tr>");
+                }
             }
             out.println("</table>");
 
