@@ -28,8 +28,6 @@
         <servlet-name>BuyFoodItemServlet</servlet-name>
         <servlet-class>controller.BuyFoodItemServlet</servlet-class>
     </servlet>
-
-
     <servlet>
         <servlet-name>GetNewlyAddedItemsServlet</servlet-name>
         <servlet-class>controller.GetNewlyAddedItemsServlet</servlet-class>
@@ -50,6 +48,10 @@
         <servlet-name>UpdateCharityFavoriteServlet</servlet-name>
         <servlet-class>controller.UpdateCharityFavoriteServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateBalanceServlet</servlet-name>
+        <servlet-class>controller.UpdateBalanceServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FWRPServlet</servlet-name>
         <url-pattern>/FWRPServlet</url-pattern>
@@ -66,12 +68,10 @@
         <servlet-name>ClaimDonationServlet</servlet-name>
         <url-pattern>/ClaimDonationServlet</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>AddFoodItemServlet</servlet-name>
         <url-pattern>/AddFoodItemServlet</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>UpdateInventorServlet</servlet-name>
         <url-pattern>/UpdateInventorServlet</url-pattern>
@@ -80,8 +80,6 @@
         <servlet-name>BuyFoodItemServlet</servlet-name>
         <url-pattern>/BuyFoodItemServlet</url-pattern>
     </servlet-mapping>
-
-    
     <servlet-mapping>
         <servlet-name>GetNewlyAddedItemsServlet</servlet-name>
         <url-pattern>/GetNewlyAddedItemsServlet</url-pattern>
@@ -101,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>UpdateCharityFavoriteServlet</servlet-name>
         <url-pattern>/UpdateCharityFavoriteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateBalanceServlet</servlet-name>
+        <url-pattern>/UpdateBalanceServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

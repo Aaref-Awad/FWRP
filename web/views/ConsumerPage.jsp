@@ -10,6 +10,7 @@
 <%@ page import="businesslayer.RetailerInventoryBusinessLogic" %>
 <%@ page import="DTO.RetailerInventoryDTO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="static java.lang.Double.parseDouble" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
     <title>JSP Page</title>
 
     <style>
-        #popup {
+        #popup, #popup2 {
             display: none;
             position: fixed;
             top: 50%;
@@ -50,6 +51,12 @@
 
         function closePopup() {
             document.getElementById('popup').style.display = 'none';
+            document.getElementById('popup2').style.display = 'none';
+
+        }
+        
+        function addBalance(){
+            document.getElementById('popup2').style.display = 'block';
         }
 
     </script>
@@ -58,6 +65,10 @@
 <body>
 <header>
     <%@ include file="../header.jsp" %>
+    <div style="float: right; margin-right: 20px;">
+        <span style="margin-right: 10px;">Balance: <%= currentUser.getBalance() %> </span>
+        <button style="margin-right: 10px;" onclick="addBalance()">Add Balance</button>
+    </div>
 </header>
 
 <main>
@@ -97,6 +108,19 @@
             %>
         </div>
     </div>
+        <!<!-- Popup for adding Consumer Balance -->
+        <div id="popup2">
+        <button id="closePopup" onclick="closePopup()">Close</button>
+        <div id="popupContent">
+            <form action='../UpdateBalanceServlet' method='post'>
+                    <input type='hidden' name='userId' value='<%= currentUser.getUserID() %>' />
+                    <input type='number' name='balance'/>
+                    <input type='submit' name='addBalance' value=' Add Balance' />
+
+            </form>
+        </div>
+    </div>
+        
 
     <%
             // Retrieve inventories related to the current user
@@ -132,7 +156,7 @@
             <!-- Add update button with inventory ID as parameter -->
             <td>
                 <form action='../BuyFoodItemServlet' method='post'>
-                    <% if ( retailerInventoryBusinessLogic.canUserBuyItem(inventory.getUserID(), inventory.getPrice()) ){ %>
+                    <% if ( retailerInventoryBusinessLogic.canUserBuyItem(currentUser.getUserID(), inventory.getPrice()) ){ %>
                     <input type='hidden' name='inventoryId' value='<%= inventory.getInventoryID() %>' />
                     <input type='submit' value='Buy'/>
                     <%}else{ %>

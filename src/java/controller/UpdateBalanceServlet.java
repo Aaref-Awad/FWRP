@@ -11,9 +11,7 @@ import businesslayer.UserBusinessLogic;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.Double.parseDouble;
-import java.sql.Date;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,10 +19,9 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Aaref
+ * @author Owner
  */
-@WebServlet(name = "BuyFoodItemServlet", urlPatterns = {"/BuyFoodItemServlet"})
-public class BuyFoodItemServlet extends HttpServlet {
+public class UpdateBalanceServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,10 +40,10 @@ public class BuyFoodItemServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet BuyFoodItemServlet</title>");            
+            out.println("<title>Servlet UpdateBalanceServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet BuyFoodItemServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateBalanceServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -82,37 +79,19 @@ public class BuyFoodItemServlet extends HttpServlet {
         Integer userId = (Integer) session.getAttribute("userId");
 
         try {
-            // Create a RetailerInventoryDTO object with updated information
-            RetailerInventoryDTO updatedInventory = new RetailerInventoryDTO();
-            if (userId != null) {
-                updatedInventory.setUserID(userId);
-            }
+           
+            double newBalance =  parseDouble(request.getParameter("balance"));
+//            if (userId != null) {
+//                updatedInventory.setUserID(userId);
+//            }
 
-            // Update inventory in the database
-            RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
-            updatedInventory = retailerInventoryBusinessLogic.getInventoryById(Integer.parseInt(request.getParameter("inventoryId")));
+            // Update User balance in the database
             UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
             UserDTO user = userBusinessLogic.getUserById(userId);
-            double OriginalPrice = updatedInventory.getPrice();
-
+           
+            user.setBalance(user.getBalance() + newBalance);
+            userBusinessLogic.updateUser(user);
             
-             if (updatedInventory.getSurplusType().equals("Sale") && retailerInventoryBusinessLogic.isSurPlus(updatedInventory) ){
-               updatedInventory.setPrice(OriginalPrice/2);
-               session.setAttribute("discountPrice", OriginalPrice/2);
-              }else{
-                updatedInventory.setPrice(OriginalPrice);
-            }
-            
-            updatedInventory.setFoodAmount(updatedInventory.getFoodAmount() - 1);
-            user.setBalance(user.getBalance() - updatedInventory.getPrice());
-                if (updatedInventory.getFoodAmount() == 0) {
-                    retailerInventoryBusinessLogic.deleteInventory(updatedInventory);
-                } else {
-                    retailerInventoryBusinessLogic.updateInventoryFoodAmount(updatedInventory);
-                    userBusinessLogic.updateUser(user);
-                }
-            
-
             // Redirect back to the consumer.jsp page
             response.sendRedirect("views/ConsumerPage.jsp");
         } catch (Exception e) {
