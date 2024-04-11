@@ -33,8 +33,19 @@
     </style>
 
     <script>
+        
+         <% 
+            Integer userId = (Integer) session.getAttribute("userId");
+            String username = (String) session.getAttribute("userName");
+            String password = (String) session.getAttribute("password");
+            UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
+            UserDTO currentUser = userBusinessLogic.getUserById((Integer) session.getAttribute("userId"));
+        %>
+        
         function showPopup() {
-            document.getElementById('popup').style.display = 'block';
+            <%if(currentUser.isSubed()){%>
+                document.getElementById('popup').style.display = 'block';
+            <%}%>
         }
 
         function closePopup() {
@@ -57,12 +68,6 @@
         <button id="closePopup" onclick="closePopup()">Close</button>
         <div id="popupContent">
             <%
-                // Check if UserId is null in the session, if yes, redirect to LoginPage.jsp
-                    Integer userId = (Integer) session.getAttribute("userId");
-                    String username = (String) session.getAttribute("userName");
-                    String password = (String) session.getAttribute("password");
-
-                    UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
                     UserDTO user = userBusinessLogic.getUserByLogin(username, password);
 
                     // Fetch newly added items from servlet
@@ -79,15 +84,10 @@
                     } else {
                         for (RetailerInventoryDTO item : items) { %>
                             <div>
-                                <% 
-                                    UserDTO user2 = userBusinessLogic.getUserById(item.getUserID());
-                                    if (retailerInventoryBusinessLogic.isFoodNameAndRetailerExists(item.getFoodName(), user2.getUsername() )){
-                                %>
                                 <p>Food Name: <%= item.getFoodName() %></p>
                                 <p>Food Amount: <%= item.getFoodAmount() %></p>
                                 <p>Expiration Date: <%= item.getExpirationDate() %></p>
                                 <p>Price: <%= item.getPrice() %></p>
-                                <% } %>
                             </div>
                             <%
                         }
@@ -100,7 +100,6 @@
     <%
             // Retrieve inventories related to the current user
             List<RetailerInventoryDTO> inventories = retailerInventoryBusinessLogic.getAllInventories();
-            UserDTO currentUser = userBusinessLogic.getUserById((Integer) session.getAttribute("userId"));
     %>
     <!-- Display the inventories in a table -->
     <table border='1'>
@@ -165,13 +164,13 @@
             if (session.getAttribute("userId") == null) {
             response.sendRedirect("../LoginPage.jsp");
         } else {
-            if (user.isSubed()) { %>
-                <input type='hidden' name='userId' value='<%= userId %>' />
+            if (currentUser.isSubed()) { %>
+                <input type='hidden' name='userId' value='<%= currentUser.getUserID() %>' />
                 <input type='hidden' name='isSubscribed' value='false' />
                 <input type='submit' value='Unsubscribe' />
                 <%
             } else { %>
-                <input type='hidden' name='userId' value='<%= userId %>' />
+                <input type='hidden' name='userId' value='<%= currentUser.getUserID() %>' />
                 <input type='hidden' name='isSubscribed' value='true' />
                 <input type='submit' value='Subscribe' />
                 <%
@@ -184,24 +183,6 @@
 <footer>
 
 </footer>
-<%
-    String showPopup = request.getParameter("showPopup");
-    if (showPopup != null && showPopup.equals("true")) {
-        %>
-        <script>
-            document.getElementById('popup').style.display = 'block';
-        </script>
-        <%
-    } %>
 
-<%
-    String closePopup = request.getParameter("closePopup");
-    if (closePopup != null && closePopup.equals("true")) {
-        %>
-        <script>
-            document.getElementById('popup').style.di splay = 'none';
-        </script>
-        <%
-    } %>
 </body>
 </html>
