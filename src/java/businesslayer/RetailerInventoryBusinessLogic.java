@@ -32,6 +32,10 @@ public class RetailerInventoryBusinessLogic {
         retailerInventoryDao.updateInventory(inventory);
     }
     
+    public void deleteInventory(RetailerInventoryDTO inventory){
+        retailerInventoryDao.deleteInventory(inventory);
+    }
+    
     public boolean isFoodNameAlreadyExists(String foodName){
         return retailerInventoryDao.isFoodNameAlreadyExists(foodName);
     }

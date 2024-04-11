@@ -91,7 +91,11 @@ public class BuyFoodItemServlet extends HttpServlet {
             RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
             updatedInventory = retailerInventoryBusinessLogic.getInventoryById(Integer.parseInt(request.getParameter("inventoryId")));
             updatedInventory.setFoodAmount(updatedInventory.getFoodAmount()-1);
+            if (updatedInventory.getFoodAmount() == 0){
+                retailerInventoryBusinessLogic.deleteInventory(updatedInventory);
+            }else{
             retailerInventoryBusinessLogic.updateInventoryFoodAmount(updatedInventory);
+            }
             // Redirect back to the UpdateInventoryPage or any other appropriate page
              
 
