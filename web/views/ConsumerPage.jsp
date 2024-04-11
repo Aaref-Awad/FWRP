@@ -51,6 +51,7 @@
         function closePopup() {
             document.getElementById('popup').style.display = 'none';
         }
+
     </script>
 
 </head>
@@ -131,8 +132,12 @@
             <!-- Add update button with inventory ID as parameter -->
             <td>
                 <form action='../BuyFoodItemServlet' method='post'>
+                    <% if ( retailerInventoryBusinessLogic.canUserBuyItem(inventory.getUserID(), inventory.getPrice()) ){ %>
                     <input type='hidden' name='inventoryId' value='<%= inventory.getInventoryID() %>' />
-                    <input type='submit' value='Buy' />
+                    <input type='submit' value='Buy'/>
+                    <%}else{ %>
+                        <input type='text' value='Cannot Afford'/>
+                    <%}%>
                 </form>
             </td>
             <!-- Checkbox for favorite -->

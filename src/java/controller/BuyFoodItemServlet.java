@@ -79,8 +79,8 @@ public class BuyFoodItemServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
-        
-        try{
+
+        try {
             // Create a RetailerInventoryDTO object with updated information
             RetailerInventoryDTO updatedInventory = new RetailerInventoryDTO();
             if (userId != null) {
@@ -90,20 +90,23 @@ public class BuyFoodItemServlet extends HttpServlet {
             // Update inventory in the database
             RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
             updatedInventory = retailerInventoryBusinessLogic.getInventoryById(Integer.parseInt(request.getParameter("inventoryId")));
-            updatedInventory.setFoodAmount(updatedInventory.getFoodAmount()-1);
-            if (updatedInventory.getFoodAmount() == 0){
-                retailerInventoryBusinessLogic.deleteInventory(updatedInventory);
-            }else{
-            retailerInventoryBusinessLogic.updateInventoryFoodAmount(updatedInventory);
-            }
-            // Redirect back to the UpdateInventoryPage or any other appropriate page
-             
+            UserBusinessLogic userBusinessLogic = new UserBusinessLogic();
+            UserDTO user = userBusinessLogic.getUserById(userId);
+            
+            updatedInventory.setFoodAmount(updatedInventory.getFoodAmount() - 1);
+                if (updatedInventory.getFoodAmount() == 0) {
+                    retailerInventoryBusinessLogic.deleteInventory(updatedInventory);
+                } else {
+                    retailerInventoryBusinessLogic.updateInventoryFoodAmount(updatedInventory);
+                }
+            
 
+            // Redirect back to the consumer.jsp page
             response.sendRedirect("views/ConsumerPage.jsp");
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally{
-
+        } finally {
+            // Cleanup code if needed
         }
     }
 

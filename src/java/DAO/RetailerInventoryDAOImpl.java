@@ -278,6 +278,30 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         // Check if the item is near expiration date by 1 week or if the amount is over 50
         return daysUntilExpiration <= 7 || inventory.getFoodAmount() > 50;
     }
+    
+    
+    @Override
+    public boolean canUserBuyItem(int userId, double itemPrice) {
+        boolean canBuy = false;
+        try {
+            // Retrieve the user's balance from the database
+            pstmt = con.prepareStatement("SELECT Balance FROM User WHERE UserID = ?");
+            pstmt.setInt(1, userId);
+            rs = pstmt.executeQuery();
+
+            // Check if the user exists and has enough balance to buy the item
+            if (rs.next()) {
+                double userBalance = rs.getDouble("Balance");
+                if (userBalance >= itemPrice) {
+                    canBuy = true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return canBuy;
+    }
+
 
 
 }

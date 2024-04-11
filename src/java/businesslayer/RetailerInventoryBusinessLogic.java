@@ -54,5 +54,10 @@ public class RetailerInventoryBusinessLogic {
     public boolean isSurPlus(RetailerInventoryDTO inventory){
         return retailerInventoryDao.isSurPlus(inventory);
     }
+    
+    public boolean canUserBuyItem(int userId, double itemPrice) {
+        return retailerInventoryDao.canUserBuyItem(userId, itemPrice);
+    }
+
 
 }
