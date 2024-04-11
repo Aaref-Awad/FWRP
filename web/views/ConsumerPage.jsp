@@ -156,7 +156,16 @@
             <!-- Add update button with inventory ID as parameter -->
             <td>
                 <form action='../BuyFoodItemServlet' method='post'>
-                    <% if ( retailerInventoryBusinessLogic.canUserBuyItem(currentUser.getUserID(), inventory.getPrice()) ){ %>
+                    <%
+                    // Retrieve the discount price from the session attribute
+                    Double discountPrice = (Double) session.getAttribute("discountPrice");
+                    // Check if the discount price is not null and if the user can buy the item with the discount price
+                    if (discountPrice != null && retailerInventoryBusinessLogic.canUserBuyItem(currentUser.getUserID(), discountPrice)) {
+                    %>
+                    <input type='hidden' name='inventoryId' value='<%= inventory.getInventoryID() %>' />
+                    <input type='submit' value='Buy'/>
+                    <%
+                    } else if ( retailerInventoryBusinessLogic.canUserBuyItem(currentUser.getUserID(), inventory.getPrice()) ){ %>
                     <input type='hidden' name='inventoryId' value='<%= inventory.getInventoryID() %>' />
                     <input type='submit' value='Buy'/>
                     <%}else{ %>
