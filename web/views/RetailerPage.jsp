@@ -30,15 +30,12 @@
             // Retrieve inventories related to the current user
             RetailerInventoryBusinessLogic retailerInventoryBusinessLogic = new RetailerInventoryBusinessLogic();
             List<RetailerInventoryDTO> inventories = retailerInventoryBusinessLogic.getInventoriesById(userId);
+            CharityInventoryBusinessLogic charityInventoryBusinessLogic = new CharityInventoryBusinessLogic();
 
             // Display the inventories in a table
             out.println("<table border='1'>");
             out.println("<tr><th>Inventory ID</th><th>Food Name</th><th>Food Amount</th><th>Expiration Date</th><th>Surplus Type</th><th>Price</th><th>Update</th></tr>");
-            for (RetailerInventoryDTO inventory : inventories) {
-                if (inventory.getSurplusType().equals("Charity") && retailerInventoryBusinessLogic.isSurPlus(inventory) ){ 
-                CharityInventoryBusinessLogic charityInventoryBusinessLogic = new CharityInventoryBusinessLogic();
-                charityInventoryBusinessLogic.addRetailerInventory(inventory);
-                }else{
+            for (RetailerInventoryDTO inventory : inventories) {                
                     out.println("<tr>");
                     out.println("<td>" + inventory.getInventoryID() + "</td>");
                     out.println("<td>" + inventory.getFoodName() + "</td>");
@@ -48,8 +45,6 @@
                     out.println("<td>" + inventory.getPrice() + "</td>");
                     // Add update button with inventory ID as parameter
                     out.println("<td><button onclick=\"window.location.href='UpdateInventoryPage.jsp?inventoryId=" + inventory.getInventoryID() + "'\">Update</button></td>");
-                    out.println("</tr>");
-                }
             }
             out.println("</table>");
 

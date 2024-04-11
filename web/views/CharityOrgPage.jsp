@@ -86,7 +86,7 @@
                             <div>
                                 <% 
                                     UserDTO user2 = userBusinessLogic.getUserById(item.getUserID());
-                                    if (charityInventoryBusinessLogic.isFoodNameAndRetailerExists(item.getFoodName(), user2.getUsername() )){
+                                    if (charityInventoryBusinessLogic.isFoodNameAndRetailerExists(item.getFoodName(), user2.getUsername()) ){
                                 %>
                                 <p>Food Name: <%= item.getFoodName() %></p>
                                 <p>Food Amount: <%= item.getFoodAmount() %></p>
@@ -120,6 +120,7 @@
                 user = userBusinessLogic.getUserById(inventory.getCharityID());
 
                 FavoriteInventoryBusinessLogic favoriteInventoryBusinessLogic = new FavoriteInventoryBusinessLogic();
+
         %>
         <tr>
             <td><%= inventory.getFoodName() %></td>

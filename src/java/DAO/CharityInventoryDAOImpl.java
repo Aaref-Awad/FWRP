@@ -268,4 +268,22 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
             e.printStackTrace();
         }
     }
+    
+    @Override
+    public boolean isCharityFoodNameAndRetailerExists(String foodName, int charityId){
+        boolean exists = false;
+        try {
+            pstmt = con.prepareStatement("SELECT COUNT(*) FROM CharityInventory WHERE FoodName = ? OR CharityID = ?");
+            pstmt.setString(1, foodName);
+            pstmt.setInt(2, charityId);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                exists = count > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
 }
