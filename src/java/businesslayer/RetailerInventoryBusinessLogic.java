@@ -32,6 +32,10 @@ public class RetailerInventoryBusinessLogic {
         retailerInventoryDao.updateInventory(inventory);
     }
     
+    public void deleteInventory(RetailerInventoryDTO inventory){
+        retailerInventoryDao.deleteInventory(inventory);
+    }
+    
     public boolean isFoodNameAlreadyExists(String foodName){
         return retailerInventoryDao.isFoodNameAlreadyExists(foodName);
     }
@@ -50,5 +54,10 @@ public class RetailerInventoryBusinessLogic {
     public boolean isSurPlus(RetailerInventoryDTO inventory){
         return retailerInventoryDao.isSurPlus(inventory);
     }
+    
+    public boolean canUserBuyItem(int userId, double itemPrice) {
+        return retailerInventoryDao.canUserBuyItem(userId, itemPrice);
+    }
+
 
 }

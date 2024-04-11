@@ -31,6 +31,11 @@ public class CharityInventoryBusinessLogic {
     public void updateInventory(CharityInventoryDTO inventory){
         charityInventoryDao.updateInventory(inventory);
     }
+    
+    public void deleteInventory(CharityInventoryDTO inventory){
+        charityInventoryDao.deleteInventory(inventory);
+    }
+    
     public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate) {
        return charityInventoryDao.getNewlyAddedItems(userId, lastLoginDate);
     }

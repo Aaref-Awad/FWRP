@@ -29,6 +29,12 @@
                         <div>
                             <input type="password" name="password" id="password" placeholder="Password" required>
                         </div>
+                        
+                        <p class="text--center">
+                            <span style="color: #4ceaae; text-transform: uppercase; font-weight: 500">
+                                <%=(request.getAttribute("errMessage") == null) ? "" : request.getAttribute("errMessage")%>
+                            </span>
+                        </p>
 
                         <button type="submit" name="submit" id="login">Login</button> <br>
                         <a href="RegistrationPage.jsp" target="target">Register</a>

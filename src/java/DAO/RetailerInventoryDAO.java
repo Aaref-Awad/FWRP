@@ -21,4 +21,6 @@ public interface RetailerInventoryDAO {
     public void updateInventoryFoodAmount(RetailerInventoryDTO inventory);
     public boolean isFoodNameAndRetailerExists(String foodName, String retailer);
     public boolean isSurPlus(RetailerInventoryDTO inventory);
+    public boolean canUserBuyItem(int userId, double itemPrice);
+
 }
