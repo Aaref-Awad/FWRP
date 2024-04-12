@@ -111,6 +111,9 @@ public class BuyFoodItemServlet extends HttpServlet {
                     retailerInventoryBusinessLogic.deleteInventory(updatedInventory);
                 } else {
                     retailerInventoryBusinessLogic.updateInventoryFoodAmount(updatedInventory);
+                    if(user.getBalance() < 0){
+                        user.setBalance(0);
+                    }
                     userBusinessLogic.updateUser(user);
                 }
             
