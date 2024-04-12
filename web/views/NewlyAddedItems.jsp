@@ -25,6 +25,68 @@
             padding: 20px;
             z-index: 9999;
         }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333; /* Text color */
+        }
+        
+        header {
+            background-color: #007bff; /* Header background color */
+            color: #fff; /* Header text color */
+            padding: 10px;
+            text-align: center;
+        }
+        
+        main {
+            margin: 20px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #007bff; /* Heading color */
+            margin-bottom: 20px;
+        }
+        
+        button#closePopup {
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            border: none;
+            padding: 10px 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        button#closePopup:hover {
+            background-color: #0056b3; /* Button hover background color */
+        }
+        
+        div {
+            background-color: #fff; /* Div background color */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        p {
+            margin-bottom: 10px;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
     </style>
 
 </head>

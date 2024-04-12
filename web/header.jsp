@@ -20,6 +20,9 @@
             justify-content: space-between;
             align-items: center;
         }
+        a {
+            color: #fff
+        }
     </style>
 </head>
 <body>

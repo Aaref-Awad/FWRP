@@ -22,8 +22,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author Aaref
+ * Servlet responsible for handling user registration.
+ * This servlet handles both GET and POST requests.
+ * Upon receiving a POST request with user registration data, it adds the user to the database
+ * and redirects the user to the appropriate page based on their user type.
+ * 
+ * @author Aaref, Luke, Tony
  */
 public class RegistrationServlet extends HttpServlet {
 

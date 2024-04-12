@@ -43,7 +43,13 @@
             <label for="expirationDate">Expiration Date:</label>
             <input type="date" name="expirationDate" value="<%= inventory.getExpirationDate() %>"><br>
             <label for="surplusType">Surplus Type:</label>
-            <input type="text" name="surplusType" value="<%= inventory.getSurplusType() %>"><br>
+            <div>
+                        <select name="surplusType" id="surplusType" required>
+                            <option value="" disabled selected>Select The Surplus Type</option>
+                            <option value="Charity">Charity</option>
+                            <option value="Sale">Sale</option>
+                        </select>
+            </div>
             <label for="price">Price:</label>
             <input type="number" name="price" value="<%= inventory.getPrice() %>"><br>
             <button type="submit">Apply Changes</button>

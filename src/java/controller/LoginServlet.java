@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  * and redirects the user to the appropriate page based on their user type.
  * If the user credentials are invalid, it displays an error message.
  * 
- * @author Aaref
+ * @author Tony, Aaref, Luke
  */
 public class LoginServlet extends HttpServlet {
 

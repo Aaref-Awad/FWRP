@@ -28,7 +28,7 @@ public class DataSource {
     private DataSource() {
         try{
             Class.forName(this.driverString);
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fwrp", "root", "arefawad12");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/fwrp", "root", "TNT2004x@");
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("Error connecting to the database", e);

@@ -13,8 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author Aaref
+ * Servlet responsible for handling user logout functionality.
+ * This servlet handles both GET and POST requests.
+ * It invalidates the user session upon logout, logging the user out of the system.
+ * After destroying the session, it typically redirects the user to the login page.
+ * 
+ * @author Aaref, Luke, Tony
  */
 public class LogoutServlet extends HttpServlet {
 

@@ -11,6 +11,63 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Inventory Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333; /* Text color */
+        }
+        
+        header {
+            background-color: #007bff; /* Header background color */
+            color: #fff; /* Header text color */
+            padding: 10px;
+            text-align: center;
+        }
+        
+        main {
+            margin: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd; /* Border color */
+            text-align: left;
+        }
+        
+        th {
+            background-color: #007bff; /* Header row background color */
+            color: #fff; /* Header row text color */
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2; /* Alternate row background color */
+        }
+        
+        tr:hover {
+            background-color: #ddd; /* Hover row background color */
+        }
+        
+        button {
+            padding: 8px 12px;
+            background-color: #007bff; /* Button background color */
+            color: #fff; /* Button text color */
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        button:hover {
+            background-color: #0056b3; /* Button hover background color */
+        }
+    </style>
 </head>
 <body>
     <header>

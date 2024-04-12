@@ -22,8 +22,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author Luke
+ * Servlet responsible for claiming donations by a charity organization.
+ * This servlet handles both GET and POST requests.
+ * It allows a charity organization to claim a donation item from its inventory.
+ * Upon claiming, the quantity of the claimed item is decreased by 1.
+ * If the quantity becomes zero, the item is deleted from the inventory.
+ * The servlet redirects back to the CharityOrgPage.jsp after processing the claim.
+ * 
+ * @author Luke, Aaref, Tony
  */
 @WebServlet(name = "ClaimDonationServlet", urlPatterns = {"/ClaimDonationServlet"})
 public class ClaimDonationServlet extends HttpServlet {
