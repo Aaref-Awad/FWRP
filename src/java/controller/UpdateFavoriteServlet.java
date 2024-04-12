@@ -20,8 +20,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- *
- * @author Aaref
+ * Servlet responsible for updating the favorite status of an inventory item for a consumer.
+ * This servlet handles both GET and POST requests.
+ * Upon receiving a POST request with the updated favorite status, it adds or deletes the favorite record
+ * in the database accordingly and redirects the user back to the Consumer page.
+ * 
+ * @author Aaref, Luke, Tony
  */
 public class UpdateFavoriteServlet extends HttpServlet {
 

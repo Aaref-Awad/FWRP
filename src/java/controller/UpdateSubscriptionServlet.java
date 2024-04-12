@@ -16,8 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author Aaref
+ * Servlet implementation class UpdateSubscriptionServlet
+ * This servlet is responsible for updating the subscription status of a user.
+ * It handles the doPost method to process the subscription update form submission.
+ * 
+ * @author Aaref, Luke, Tony
  */
 public class UpdateSubscriptionServlet extends HttpServlet {
 

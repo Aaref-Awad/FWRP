@@ -21,8 +21,11 @@ import javax.servlet.http.HttpSession;
 
 
 /**
- *
- * @author Aaref
+ * Servlet implementation class UpdateInventorServlet
+ * This servlet is responsible for updating the inventory information.
+ * It handles the doPost method to process the inventory update form submission.
+ * 
+ * @author Aaref, Luke, Tony
  */
 public class UpdateInventorServlet extends HttpServlet {
 

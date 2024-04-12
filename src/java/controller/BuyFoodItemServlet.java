@@ -20,8 +20,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Servlet responsible for buying food items from a retailer's inventory.
+ * This servlet handles both GET and POST requests.
  *
- * @author Aaref
+ * @author Aaref, Luke, Tony
  */
 @WebServlet(name = "BuyFoodItemServlet", urlPatterns = {"/BuyFoodItemServlet"})
 public class BuyFoodItemServlet extends HttpServlet {

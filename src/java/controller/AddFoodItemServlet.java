@@ -18,8 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * Servlet responsible for adding food items to inventory.
+ * This servlet handles both GET and POST requests.
  *
- * @author Aaref
+ * @author Aaref, Luke, Tony
  */
 public class AddFoodItemServlet extends HttpServlet {
 

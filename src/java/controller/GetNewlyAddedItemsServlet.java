@@ -21,8 +21,12 @@ import businesslayer.UserBusinessLogic;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author Aaref
+ * Servlet responsible for retrieving newly added items since the user's last login.
+ * This servlet handles both GET and POST requests.
+ * It retrieves newly added items from the database based on the user's last login date.
+ * The retrieved items are then formatted as JSON and sent as a response.
+ * 
+ * @author Aaref, Luke, Tony
  */
 public class GetNewlyAddedItemsServlet extends HttpServlet {
 

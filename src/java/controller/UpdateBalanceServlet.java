@@ -18,8 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author Owner
+ * Servlet responsible for updating the balance of a user.
+ * This servlet handles both GET and POST requests.
+ * Upon receiving a POST request with the new balance value, it updates the user's balance in the database
+ * and redirects the user to the consumer page.
+ * 
+ * @author Aaref, Luke, Tony
  */
 public class UpdateBalanceServlet extends HttpServlet {
 
