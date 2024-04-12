@@ -1,15 +1,71 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<head>
+    <title>FOOD WASTE REDUCTION PLATFORM</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+            color: #333; /* Text color */
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        header {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #9c27b0; /* Header color */
+        }
+
+        
+        form {
+            margin-top: 20px;
+        }
+        
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <header>WELCOME TO THE FOOD WASTE REDUCTION PLATFORM</header>
+        
+        <!-- Button leading to LoginPage.jsp -->
+        <form action="LoginPage.jsp">
+            <input type="submit" value="LOGIN" />
+        </form>
+        
+        <!-- Button leading to RegistrationPage.jsp -->
+        <form action="RegistrationPage.jsp">
+            <input type="submit" value="REGISTER"/>
+        </form>
+    </div>
+</body>
 </html>

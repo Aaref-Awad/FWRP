@@ -21,7 +21,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         
-        <style>
+       
+    <style>
         #popup {
             display: none;
             position: fixed;
@@ -35,7 +36,104 @@
             max-height: 80%; /* Set maximum height */
             overflow-y: auto; /* Enable vertical scrolling if needed */
         }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            overflow: auto; /* Handle overflow */
+        }
+
+        header div {
+            float: right;
+            margin-right: 20px;
+            overflow: auto; /* Handle overflow */
+        }
+
+        header span {
+            margin-right: 10px;
+        }
+
+        header button {
+            margin-right: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        header button:hover {
+            background-color: #0056b3;
+        }
+
+        main {
+            margin: 20px;
+            text-align: center;
+        }
+
+        button#showNewItems {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button#showNewItems:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #007bff;
+            color: #fff;
+        }
     </style>
+
 
     <script>
          <% 

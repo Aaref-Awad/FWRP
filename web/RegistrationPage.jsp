@@ -10,6 +10,74 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+                color: #333; /* Text color */
+            }
+
+            header, footer {
+                text-align: center;
+                padding: 10px 0;
+                background-color: #007bff; /* Header and footer background color */
+                color: #fff; /* Header and footer text color */
+            }
+
+            main {
+                max-width: 400px;
+                margin: 50px auto;
+                padding: 20px;
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+                color: #007bff; /* Heading color */
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            select {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+            }
+
+            button[type="submit"] {
+                width: 100%;
+                padding: 10px;
+                background-color: #007bff;
+                border: none;
+                color: #fff;
+                font-size: 18px;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+            }
+
+            button[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+
+            a {
+                text-decoration: none;
+                color: #007bff; /* Link color */
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+        </style>
     </head>
     <body>
         <header>
