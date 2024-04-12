@@ -14,14 +14,17 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- *
- * @author Owner
+ * Manages database connection and provides a singleton instance.
  */
 public class DataSource {
 
     private static Connection connection = null;
     private String driverString = "com.mysql.cj.jdbc.Driver";
     private static DataSource instance;
+    
+    /**
+     * Constructs a DataSource object and initializes the database connection.
+     */
     private DataSource() {
         try{
             Class.forName(this.driverString);
@@ -34,7 +37,12 @@ public class DataSource {
             throw new RuntimeException("Driver class not found", e);
         }
     }
-    // Method to get the singleton instance of DBConnection
+    
+    /**
+     * Retrieves the singleton instance of DataSource.
+     *
+     * @return The singleton instance of DataSource.
+     */
     public static DataSource getInstance() {
         if (instance == null) {
 
@@ -43,7 +51,11 @@ public class DataSource {
         return instance;
     }
 
-        // Method to get the database connection
+    /**
+     * Retrieves the database connection.
+     *
+     * @return The database connection.
+     */
     public Connection getConnection() {
     
         return connection;

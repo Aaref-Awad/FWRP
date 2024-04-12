@@ -14,7 +14,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Implementation of CharityInventoryDAO
+ * Retrieves all Charity Inventory records from the database.
+ *
+ * @return a list of all Charity Inventory records
  */
 public class CharityInventoryDAOImpl implements CharityInventoryDAO {
 
@@ -48,6 +50,12 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         return inventories;
     }
 
+    /**
+     * Retrieves a Charity Inventory record from the database by its ID.
+     *
+     * @param inventoryId the ID of the Charity Inventory record to retrieve
+     * @return the Charity Inventory record with the specified ID, or null if not found
+     */
     @Override
     public CharityInventoryDTO getInventoryById(int inventoryId) {
         CharityInventoryDTO inventory = null;
@@ -72,6 +80,12 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         return inventory;
     }
 
+    /**
+     * Retrieves all Charity Inventory records associated with a specific charity from the database.
+     *
+     * @param charityId the ID of the charity
+     * @return a list of Charity Inventory records associated with the specified charity
+     */
     @Override
     public List<CharityInventoryDTO> getInventoriesByCharityId(int charityId) {
         ArrayList<CharityInventoryDTO> inventories = null;
@@ -97,6 +111,11 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         return inventories;
     }
 
+    /**
+     * Inserts a new Charity Inventory record into the database.
+     *
+     * @param inventory the Charity Inventory record to insert
+     */
     @Override
     public void insertInventory(CharityInventoryDTO inventory) {
         try {
@@ -113,7 +132,12 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
             e.printStackTrace();
         }
     }
-
+    
+    /**
+     * Updates an existing Charity Inventory record in the database.
+     *
+     * @param inventory the Charity Inventory record to update
+     */
     @Override
     public void updateInventory(CharityInventoryDTO inventory) {
         try {
@@ -131,6 +155,11 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         }
     }
 
+    /**
+     * Deletes a Charity Inventory record from the database.
+     *
+     * @param inventory the Charity Inventory record to delete
+     */
     @Override
     public void deleteInventory(CharityInventoryDTO inventory) {
         try {
@@ -153,6 +182,13 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         }
     }
     
+    /**
+     * Retrieves a list of Retailer Inventory records for items added after the last login date of a user.
+     *
+     * @param userId the ID of the user
+     * @param lastLoginDate the date of the last login for the user
+     * @return a list of Retailer Inventory records for items added after the last login date
+     */
     @Override
     public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate) {
         List<RetailerInventoryDTO> newlyAddedItems = new ArrayList<>();
@@ -203,6 +239,13 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
            return newlyAddedItems;
        }
     
+    /**
+     * Checks if a given food name and retailer combination already exists in the database.
+     *
+     * @param foodName the name of the food
+     * @param retailer the name of the retailer
+     * @return true if the food name and retailer combination exists, false otherwise
+     */
     @Override
     public boolean isFoodNameAndRetailerExists(String foodName, String retailer){
         boolean exists = false;
@@ -221,6 +264,11 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         return exists;
     }
 
+    /**
+     * Inserts a new retailer inventory record into the database.
+     *
+     * @param inventory the RetailerInventoryDTO object containing inventory details
+     */
     public void insertRetailerInventory(RetailerInventoryDTO inventory) {
                 try {
             pstmt = con.prepareStatement(
@@ -237,6 +285,13 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
         }
     }
     
+    /**
+     * Checks if a given food name and charity ID combination already exists in the database.
+     *
+     * @param foodName the name of the food
+     * @param charityId the ID of the charity
+     * @return true if the food name and charity ID combination exists, false otherwise
+     */
     @Override
     public boolean isCharityFoodNameAndRetailerExists(String foodName, int charityId){
         boolean exists = false;
