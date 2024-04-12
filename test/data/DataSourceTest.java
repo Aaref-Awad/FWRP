@@ -5,35 +5,50 @@
 package data;
 
 import java.sql.Connection;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
- *
+ * Unit tests for the DataSource class.
  * @author Luke
  */
 public class DataSourceTest {
     
+    /**
+     * Constructor for DataSourceTest.
+     */
     public DataSourceTest() {
     }
     
-    @BeforeAll
+    /**
+     * Setup method executed once before all test methods.
+     */
+    @BeforeClass
     public static void setUpClass() {
     }
     
-    @AfterAll
+    /**
+     * Tear down method executed once after all test methods.
+     */
+    @AfterClass
     public static void tearDownClass() {
     }
     
-    @BeforeEach
+    /**
+     * Setup method executed before each test method.
+     */
+    @Before
     public void setUp() {
     }
     
-    @AfterEach
+    /**
+     * Tear down method executed after each test method.
+     */
+    @After
     public void tearDown() {
     }
 
@@ -63,5 +78,4 @@ public class DataSourceTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
 }
