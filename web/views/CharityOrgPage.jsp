@@ -264,13 +264,13 @@
             if (session.getAttribute("userId") == null) {
             response.sendRedirect("../LoginPage.jsp");
         } else {
-            if (user.isSubed()) { %>
-                <input type='hidden' name='userId' value='<%= userId %>' />
+            if (currentUser.isSubed()) { %>
+                <input type='hidden' name='userId' value='<%= currentUser.getUserID() %>' />
                 <input type='hidden' name='isSubscribed' value='false' />
                 <input type='submit' value='Unsubscribe' />
                 <%
             } else { %>
-                <input type='hidden' name='userId' value='<%= userId %>' />
+                <input type='hidden' name='userId' value='<%= currentUser.getUserID() %>' />
                 <input type='hidden' name='isSubscribed' value='true' />
                 <input type='submit' value='Subscribe' />
                 <%
