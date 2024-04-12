@@ -14,9 +14,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Retrieves all Charity Inventory records from the database.
+ * Data Access Object for CharityInventory table in the databade
+ * perform CRUD Operations
  *
- * @return a list of all Charity Inventory records
+ * 
  */
 public class CharityInventoryDAOImpl implements CharityInventoryDAO {
 
@@ -24,6 +25,11 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
     private static PreparedStatement pstmt;
     private static ResultSet rs;
 
+ /**
+ * Retrieves all Charity Inventory records from the database.
+ *
+ * @return a list of all Charity Inventory records
+ */
     @Override
     public List<CharityInventoryDTO> getAllInventories() {
         ArrayList<CharityInventoryDTO> inventories = null;
