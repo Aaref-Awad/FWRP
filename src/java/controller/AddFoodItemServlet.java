@@ -92,7 +92,7 @@ public class AddFoodItemServlet extends HttpServlet {
             inventory.setSurplusType(request.getParameter("SurplusType"));
             inventory.setFoodName(request.getParameter("FoodName"));
             inventory.setPrice(0.0); 
-            if (inventory.getSurplusType().equals("Charity") && retailerInventoryBusinessLogic.isSurPlus(inventory) && !(charityInventoryBusinessLogic.isCharityFoodNameAndRetailerExists(inventory.getFoodName() ,inventory.getUserID())) ){ 
+            if (inventory.getSurplusType().equals("Charity") && retailerInventoryBusinessLogic.isSurPlus(inventory) ){ 
                 charityInventoryBusinessLogic.addRetailerInventory(inventory);
             }else{
                 retailerInventoryBusinessLogic.addInventory(inventory);

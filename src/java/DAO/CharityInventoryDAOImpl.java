@@ -302,7 +302,7 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
     public boolean isCharityFoodNameAndRetailerExists(String foodName, int charityId){
         boolean exists = false;
         try {
-            pstmt = con.prepareStatement("SELECT COUNT(*) FROM CharityInventory WHERE FoodName = ? OR CharityID = ?");
+            pstmt = con.prepareStatement("SELECT COUNT(*) FROM CharityInventory WHERE FoodName = ? AND CharityID = ?");
             pstmt.setString(1, foodName);
             pstmt.setInt(2, charityId);
             rs = pstmt.executeQuery();
