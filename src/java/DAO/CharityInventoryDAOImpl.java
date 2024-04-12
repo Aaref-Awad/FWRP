@@ -213,12 +213,10 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
                while (rs.next()) {
                    RetailerInventoryDTO inventory = new RetailerInventoryDTO();
                    inventory.setInventoryID(rs.getInt("InventoryID"));
-                   inventory.setUserID(rs.getInt("UserID"));
-                   inventory.setFoodAmount(rs.getInt("FoodAmount"));
+                   inventory.setUserID(rs.getInt("CharityID"));
+                   inventory.setFoodAmount(rs.getInt("Quantity"));
                    inventory.setFoodName(rs.getString("FoodName"));
-                   inventory.setPrice(rs.getDouble("Price"));
                    inventory.setExpirationDate(rs.getDate("ExpirationDate"));
-                   inventory.setSurplusType(rs.getString("SurplusType"));
                    inventory.setItemAdded(rs.getTimestamp("ItemAdded"));
                    newlyAddedItems.add(inventory);
                }
@@ -302,7 +300,7 @@ public class CharityInventoryDAOImpl implements CharityInventoryDAO {
     public boolean isCharityFoodNameAndRetailerExists(String foodName, int charityId){
         boolean exists = false;
         try {
-            pstmt = con.prepareStatement("SELECT COUNT(*) FROM CharityInventory WHERE FoodName = ? OR CharityID = ?");
+            pstmt = con.prepareStatement("SELECT COUNT(*) FROM CharityInventory WHERE FoodName = ? AND CharityID = ?");
             pstmt.setString(1, foodName);
             pstmt.setInt(2, charityId);
             rs = pstmt.executeQuery();
