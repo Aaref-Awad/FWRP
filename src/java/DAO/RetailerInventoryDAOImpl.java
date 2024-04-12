@@ -28,6 +28,11 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
     private static PreparedStatement pstmt;
     private static ResultSet rs;
 
+    /**
+     * Retrieves all retailer inventory items from the database.
+     *
+     * @return A list of all retailer inventory items.
+     */
     @Override
     public List<RetailerInventoryDTO> getAllInventories() {
         ArrayList<RetailerInventoryDTO> inventories = null;
@@ -57,6 +62,12 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         return inventories;
     }
 
+    /**
+     * Retrieves a retailer inventory item from the database by its ID.
+     *
+     * @param inventoryId The ID of the inventory item to retrieve.
+     * @return The retailer inventory item with the specified ID, or null if not found.
+     */
     @Override
     public RetailerInventoryDTO getInventoryById(int inventoryId) {
         RetailerInventoryDTO inventory = null;
@@ -84,6 +95,12 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         return inventory;
     }
 
+    /**
+    * Retrieves all retailer inventory items for a specific user from the database.
+    *
+    * @param userId The ID of the user.
+    * @return A list of all retailer inventory items for the specified user.
+    */
     @Override
     public List<RetailerInventoryDTO> getInventoriesByUserId(int userId) {
         ArrayList<RetailerInventoryDTO> inventories = null;
@@ -113,6 +130,11 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
     }
 
 
+    /**
+    * Inserts a new retailer inventory item into the database.
+    *
+    * @param inventory The retailer inventory item to insert.
+    */
     @Override
     public void insertInventory(RetailerInventoryDTO inventory) {
         try {
@@ -132,6 +154,11 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         }
     }
 
+    /**
+    * Updates an existing retailer inventory item in the database.
+    *
+    * @param inventory The retailer inventory item to update.
+    */
     @Override
     public void updateInventory(RetailerInventoryDTO inventory) {
         try {
@@ -151,6 +178,11 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         }
     }
 
+    /**
+    * Deletes a retailer inventory item from the database.
+    *
+    * @param inventory The retailer inventory item to delete.
+    */
     @Override
     public void deleteInventory(RetailerInventoryDTO inventory) {
         try {
@@ -164,6 +196,12 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         }
     }
 
+    /**
+    * Checks if a food item with the given name already exists in the database.
+    *
+    * @param foodName The name of the food item to check.
+    * @return true if the food item already exists, false otherwise.
+    */
     @Override
     public boolean isFoodNameAlreadyExists(String foodName) {
         boolean exists = false;
@@ -181,6 +219,11 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         return exists;
     }
         
+    /**
+    * Updates the amount of food in a retailer inventory item in the database.
+    *
+    * @param inventory The retailer inventory item to update.
+    */
     @Override
     public void updateInventoryFoodAmount(RetailerInventoryDTO inventory) {
         try {
@@ -195,6 +238,13 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
     }
 
 
+    /**
+    * Retrieves a list of retailer inventory items that were added after the user's last login date.
+    *
+    * @param userId The ID of the user.
+    * @param lastLoginDate The date of the user's last login.
+    * @return A list of retailer inventory items added after the last login date.
+    */
     @Override
     public List<RetailerInventoryDTO> getNewlyAddedItems(int userId, Date lastLoginDate) {
         List<RetailerInventoryDTO> newlyAddedItems = new ArrayList<>();
@@ -245,6 +295,13 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
            return newlyAddedItems;
        }
     
+    /**
+    * Checks if a food item with the given name or a retailer with the given name already exists in the database.
+    *
+    * @param foodName The name of the food item to check.
+    * @param retailer The name of the retailer to check.
+    * @return true if the food item or retailer already exists, false otherwise.
+    */
     @Override
     public boolean isFoodNameAndRetailerExists(String foodName, String retailer){
         boolean exists = false;
@@ -263,6 +320,12 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         return exists;
     }
     
+    /**
+    * Checks if a retailer inventory item is near expiration date or if the amount is over 50.
+    *
+    * @param inventory The retailer inventory item to check.
+    * @return true if the item is near expiration date or if the amount is over 50, false otherwise.
+    */
     @Override
     public boolean isSurPlus(RetailerInventoryDTO inventory) {
         // Convert the expiration date to LocalDate
@@ -279,7 +342,13 @@ public class RetailerInventoryDAOImpl implements RetailerInventoryDAO {
         return daysUntilExpiration <= 7 || inventory.getFoodAmount() > 50;
     }
     
-    
+    /**
+    * Checks if a user can buy an item based on their balance.
+    *
+    * @param userId The ID of the user.
+    * @param itemPrice The price of the item.
+    * @return true if the user can buy the item, false otherwise.
+    */
     @Override
     public boolean canUserBuyItem(int userId, double itemPrice) {
         boolean canBuy = false;

@@ -10,12 +10,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of the FavoriteInventoryDAO interface for managing favorite inventory items in a database.
+ */
 public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
 
     private static Connection con = DataSource.getInstance().getConnection();
     private static PreparedStatement pstmt;
     private static ResultSet rs;
 
+    /**
+     * Retrieves all favorite inventory items from the database.
+     *
+     * @return A list of all favorite inventory items.
+     */
     @Override
     public List<FavoriteInventoryDTO> getAllFavorites() {
         ArrayList<FavoriteInventoryDTO> favorites = null;
@@ -42,6 +50,12 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         return favorites;
     }
 
+    /**
+     * Retrieves a favorite inventory item from the database by its ID.
+     *
+     * @param favoriteId The ID of the favorite inventory item to retrieve.
+     * @return The favorite inventory item with the specified ID, or null if not found.
+     */
     @Override
     public FavoriteInventoryDTO getFavoriteById(int favoriteId) {
         FavoriteInventoryDTO favorite = null;
@@ -65,6 +79,12 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         return favorite;
     }
 
+    /**
+     * Retrieves all favorite inventory items for a specific user from the database.
+     *
+     * @param userId The ID of the user.
+     * @return A list of all favorite inventory items for the specified user.
+     */
     @Override
     public List<FavoriteInventoryDTO> getFavoritesByUserId(int userId) {
         ArrayList<FavoriteInventoryDTO> favorites = null;
@@ -89,6 +109,11 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         return favorites;
     }
 
+    /**
+     * Inserts a new favorite inventory item into the database.
+     *
+     * @param favorite The favorite inventory item to insert.
+     */
     @Override
     public void insertFavorite(FavoriteInventoryDTO favorite) {
         try {
@@ -104,6 +129,11 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         }
     }
 
+    /**
+     * Updates an existing favorite inventory item in the database.
+     *
+     * @param favorite The favorite inventory item to update.
+     */
     @Override
     public void updateFavorite(FavoriteInventoryDTO favorite) {
         try {
@@ -120,6 +150,11 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         }
     }
 
+    /**
+     * Deletes a favorite inventory item from the database.
+     *
+     * @param favorite The favorite inventory item to delete.
+     */
     @Override
     public void deleteFavorite(FavoriteInventoryDTO favorite) {
         try {
@@ -132,6 +167,13 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         }
     }
 
+    /**
+     * Checks if a favorite inventory item already exists in the database.
+     *
+     * @param inventoryId The ID of the inventory item.
+     * @param userId      The ID of the user.
+     * @return true if the favorite inventory item already exists, false otherwise.
+     */
     @Override
     public boolean isFavoriteAlreadyExists(int inventoryId, int userId) {
         try {
@@ -150,6 +192,11 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         return false;
     }
 
+    /**
+    * Deletes a favorite inventory item from the database by its ID.
+    *
+    * @param favoriteId The ID of the favorite inventory item to delete.
+    */
     @Override
     public void deleteFavoriteById(int favoriteId) {
         try {
@@ -162,6 +209,13 @@ public class FavoriteInventoryDAOImpl implements FavoriteInventoryDAO {
         }
     }
     
+    /**
+ * Retrieves the ID of a favorite inventory item from the database by inventory ID and user ID.
+ *
+ * @param inventoryId The ID of the inventory item.
+ * @param userId      The ID of the user.
+ * @return The ID of the favorite inventory item, or -1 if not found.
+ */
     @Override
     public int getFavoriteIdByInventoryIdAndUserId(int inventoryId, int userId) {
         int favoriteId = -1; // Default value if no favorite found

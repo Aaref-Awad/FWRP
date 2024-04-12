@@ -11,12 +11,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * This class provides implementation for accessing user data in a database.
+ */
 public class UserDAOImpl implements UserDAO {
 
     private static Connection con = DataSource.getInstance().getConnection();
     private static PreparedStatement pstmt;
     private static ResultSet rs;
 
+    /**
+     * Retrieves all users from the database.
+     *
+     * @return A list of UserDTO objects representing all users in the database.
+     */
     @Override
     public List<UserDTO> getAllUsers() {
         ArrayList<UserDTO> users = null;
@@ -46,6 +54,12 @@ public class UserDAOImpl implements UserDAO {
         return users;
     }
 
+    /**
+     * Retrieves a user from the database by their ID.
+     *
+     * @param userId The ID of the user to retrieve.
+     * @return A UserDTO object representing the user with the specified ID, or null if not found.
+     */
     @Override
     public UserDTO getUserById(int userId) {
         UserDTO user = null;
@@ -73,6 +87,13 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    /**
+     * Retrieves a user from the database by their login credentials.
+     *
+     * @param username The username of the user.
+     * @param password The password of the user.
+     * @return A UserDTO object representing the user with the specified login credentials, or null if not found.
+     */
     @Override
     public UserDTO getUserByLogin(String username, String password) {
         UserDTO user = null;
@@ -101,6 +122,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
 
+    /**
+     * Inserts a new user into the database.
+     *
+     * @param user The UserDTO object representing the user to be inserted.
+     */
     @Override
     public void insertUser(UserDTO user) {
         try {
@@ -127,6 +153,11 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Updates an existing user in the database.
+     *
+     * @param user The UserDTO object representing the user to be updated.
+     */
     @Override
     public void updateUser(UserDTO user) {
         try {
@@ -147,6 +178,11 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+     /**
+     * Deletes a user from the database.
+     *
+     * @param user The UserDTO object representing the user to be deleted.
+     */
     @Override
     public void deleteUser(UserDTO user) {
         try {
@@ -159,6 +195,13 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Checks if a user with the specified username already exists in the database.
+     *
+     * @param username The username to check for existence.
+     * @return true if the user exists, false otherwise.
+     * @throws SQLException If a database access error occurs.
+     */
     private boolean userExists(String username) throws SQLException {
         try (PreparedStatement pstmt = con.prepareStatement("SELECT COUNT(*) FROM User WHERE Username = ?")) {
             pstmt.setString(1, username);
@@ -171,6 +214,12 @@ public class UserDAOImpl implements UserDAO {
         return false;
     }
     
+    /**
+     * Updates the last login timestamp of a user in the database.
+     *
+     * @param userId    The ID of the user.
+     * @param lastLogin The new last login timestamp.
+     */
     @Override
     public void updateUserLastLogin(int userId, Date lastLogin) {
         try {
